@@ -1320,7 +1320,7 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: Tahoma, G
   <div class="ctx-item" onclick="openProperties()">properties</div>
   <div class="ctx-divider"></div>
   <div class="ctx-item" onclick="openAboutSite()">about this site</div>
-  <div class="ctx-item" onclick="window.open('#','_blank');hideContextMenu()">view source</div>
+  <div class="ctx-item" onclick="hideContextMenu();openBrowser('GitHub','https://github.com/Galaxypham','img:github.png')">view source</div>
   <div class="ctx-divider"></div>
   <div class="ctx-item" onclick="triggerShutdown()">turn off computer</div>
 </div>
@@ -2110,45 +2110,76 @@ setTimeout(() => {
 /* ============================
    DRAGGABLE DESKTOP ICONS
    ============================ */
+function computeDefaultIconPositions() {
+  const STEP = 92;
+  const ICON_W = 96;
+  const TOP = 16;
+  const LEFT = 16;
+  const availH = window.innerHeight - 36 - TOP - 60; // 36px taskbar, 60px bottom buffer
+  const perCol = Math.max(1, Math.floor(availH / STEP));
+  const rightX = Math.max(window.innerWidth - 96, 200);
+
+  const leftOrder = ['about', 'cats', 'photography', 'hobbies', 'music', 'bakery', 'racks', 'roadmap'];
+  const rightOrder = ['LinkedIn', 'Notion', 'GitHub'];
+  const pos = {};
+
+  // Left side wraps into additional columns if vertical space runs out
+  leftOrder.forEach((key, i) => {
+    const col = Math.floor(i / perCol);
+    const row = i % perCol;
+    pos[key] = { x: LEFT + col * ICON_W, y: TOP + row * STEP };
+  });
+
+  // Right side also wraps — extra columns grow leftward
+  rightOrder.forEach((key, i) => {
+    const col = Math.floor(i / perCol);
+    const row = i % perCol;
+    pos[key] = { x: rightX - col * ICON_W, y: TOP + row * STEP };
+  });
+
+  // Recycle bin pinned to bottom-right; if it would overlap a right-side icon,
+  // anchor it to the next free row in the right column instead
+  const usedRightRows = Math.min(rightOrder.length, perCol);
+  const bottomRow = perCol - 1;
+  if (bottomRow > usedRightRows - 1) {
+    pos['recycle'] = { x: rightX, y: TOP + bottomRow * STEP };
+  } else {
+    pos['recycle'] = { x: rightX, y: TOP + usedRightRows * STEP };
+  }
+  return pos;
+}
+
 function initDesktopIcons() {
-  const ICON_LAYOUT_VERSION = 'v9';
+  const ICON_LAYOUT_VERSION = 'v11';
   if (localStorage.getItem('iconLayoutVersion') !== ICON_LAYOUT_VERSION) {
     localStorage.removeItem('iconPositions');
     localStorage.setItem('iconLayoutVersion', ICON_LAYOUT_VERSION);
   }
   const icons = document.querySelectorAll('.desktop-icon');
   const saved = JSON.parse(localStorage.getItem('iconPositions') || '{}');
-  const rightX = Math.max(window.innerWidth - 96, 200);
-  const bottomY = Math.max(window.innerHeight - 160, 400);
-  const defaults = {
-    about: { x: 16, y: 16 },
-    cats: { x: 16, y: 108 },
-    photography: { x: 16, y: 200 },
-    hobbies: { x: 16, y: 292 },
-    music: { x: 16, y: 384 },
-    bakery: { x: 16, y: 476 },
-    racks: { x: 16, y: 568 },
-    roadmap: { x: 16, y: 660 },
-    LinkedIn: { x: rightX, y: 16 },
-    Notion: { x: rightX, y: 108 },
-    GitHub: { x: rightX, y: 200 },
-    recycle: { x: rightX, y: bottomY }
-  };
+  const defaults = computeDefaultIconPositions();
+  const maxX = window.innerWidth - 80;
+  const maxY = window.innerHeight - 130;
 
   icons.forEach((icon, i) => {
     const key = (icon.dataset.folder || icon.querySelector('.icon-label').textContent.trim()).replace(/\s+/g, '_');
     icon.dataset.key = key;
 
+    let pos;
     if (saved[key]) {
-      icon.style.left = saved[key].x + 'px';
-      icon.style.top = saved[key].y + 'px';
+      // Clamp saved positions to current screen bounds so nothing hides off-screen
+      pos = {
+        x: Math.max(0, Math.min(maxX, saved[key].x)),
+        y: Math.max(0, Math.min(maxY, saved[key].y))
+      };
     } else if (defaults[key]) {
-      icon.style.left = defaults[key].x + 'px';
-      icon.style.top = defaults[key].y + 'px';
+      pos = defaults[key];
     } else {
-      icon.style.left = (16 + Math.floor(i / 8) * 96) + 'px';
-      icon.style.top = (16 + (i % 8) * 92) + 'px';
+      const col = Math.floor(i / 8);
+      pos = { x: 16 + col * 96, y: 16 + (i % 8) * 92 };
     }
+    icon.style.left = pos.x + 'px';
+    icon.style.top  = pos.y + 'px';
 
     let dragging = false, moved = false, sx, sy, ox, oy;
     icon.addEventListener('mousedown', e => {
@@ -2171,7 +2202,7 @@ function initDesktopIcons() {
         const newX = Math.max(0, Math.min(window.innerWidth - 80, ox + dx));
         const newY = Math.max(0, Math.min(window.innerHeight - 130, oy + dy));
         icon.style.left = newX + 'px';
-        icon.style.top = newY + 'px';
+        icon.style.top  = newY + 'px';
       }
     });
     document.addEventListener('mouseup', () => {
@@ -2190,6 +2221,32 @@ function initDesktopIcons() {
   });
 }
 initDesktopIcons();
+
+// Re-flow icons if the window is resized (e.g. zoom level change)
+window.addEventListener('resize', () => {
+  const maxX = window.innerWidth - 80;
+  const maxY = window.innerHeight - 130;
+  const saved = JSON.parse(localStorage.getItem('iconPositions') || '{}');
+  const defaults = computeDefaultIconPositions();
+  document.querySelectorAll('.desktop-icon').forEach(icon => {
+    const key = icon.dataset.key;
+    let x, y;
+    if (saved[key]) {
+      // User has manually placed this icon — keep their choice but clamp on-screen
+      x = Math.max(0, Math.min(maxX, saved[key].x));
+      y = Math.max(0, Math.min(maxY, saved[key].y));
+    } else if (defaults[key]) {
+      // Otherwise re-flow to fit the new viewport
+      x = defaults[key].x;
+      y = defaults[key].y;
+    } else {
+      x = Math.max(0, Math.min(maxX, icon.offsetLeft));
+      y = Math.max(0, Math.min(maxY, icon.offsetTop));
+    }
+    icon.style.left = x + 'px';
+    icon.style.top  = y + 'px';
+  });
+});
 
 /* ============================
    CLOCK
