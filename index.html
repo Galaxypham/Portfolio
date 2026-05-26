@@ -2690,12 +2690,12 @@ function triggerShutdown() {
    SPLASH SCREEN
    ============================ */
 const fakePopups = [
-  { title: 'virus.exe', msg: 'WARNING: too much talent detected on this machine' },
-  { title: 'error.dll', msg: 'CRITICAL: cuteness levels exceeding safe limits' },
-  { title: 'alert.bat', msg: 'your computer has been infected with... my portfolio' },
-  { title: 'uh_oh.exe', msg: 'ERROR 404: boring personality not found' },
-  { title: 'warning.sys', msg: 'system overload: this person is too cool' },
-  { title: 'panic.exe', msg: 'FATAL: hire this person immediately' }
+  { title: 'hey.exe',       icon: '\u2728',          msg: "psst, an excessive amount of talent has been detected" },
+  { title: 'info.exe',      icon: '\uD83D\uDCBC',    msg: "FYI: this person is currently open to opportunities" },
+  { title: 'fyi.exe',       icon: '\uD83C\uDF1F',    msg: "you've just opened my portfolio. proceed with curiosity" },
+  { title: 'fun_fact.exe',  icon: '\uD83D\uDCA1',    msg: "fun fact: zero boring personality detected here" },
+  { title: 'psa.exe',       icon: '\uD83E\uDE77',    msg: "PSA: this person genuinely loves building things" },
+  { title: 'heads_up.exe',  icon: '\uD83D\uDC96',    msg: "heads up: please consider hiring this person" }
 ];
 
 let fakePopupZ = 55;
@@ -2720,7 +2720,8 @@ function spawnFakePopup(data, index) {
   el.className = 'fake-popup';
   const pos = getFixedPositions()[index];
   el.style.cssText = `left:${pos.x}px;top:${pos.y}px;z-index:${++fakePopupZ};transform:rotate(${pos.rot}deg);`;
-  el.innerHTML = `<div class="fp-titlebar"><span class="fp-icon">\u26a0\ufe0f</span><span class="fp-title">${data.title}</span><span class="fp-close">\u2715</span></div><div class="fp-body"><span class="fp-warn">\u26a0\ufe0f</span><span class="fp-msg">${data.msg}</span></div><div class="fp-btnbar"><button class="fp-ok">OK</button></div>`;
+  const ic = data.icon || '\u2728';
+  el.innerHTML = `<div class="fp-titlebar"><span class="fp-icon">${ic}</span><span class="fp-title">${data.title}</span><span class="fp-close">\u2715</span></div><div class="fp-body"><span class="fp-warn">${ic}</span><span class="fp-msg">${data.msg}</span></div><div class="fp-btnbar"><button class="fp-ok">OK</button></div>`;
 
   el.querySelector('.fp-close').addEventListener('click', () => el.remove());
   el.querySelector('.fp-ok').addEventListener('click', () => el.remove());
