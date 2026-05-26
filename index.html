@@ -620,6 +620,258 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: Tahoma, G
 .product-iframe-fallback .open-btn { padding: 8px 20px; background: none; border: 2px solid var(--content-border); color: #ffb3ff; font-family: 'VT323', monospace; font-size: 20px; cursor: pointer; }
 .product-iframe-fallback .open-btn:hover { background: rgba(204,0,119,0.15); }
 
+/* Case study sections (extends .product-window) */
+.case-section { padding: 0 24px 18px; }
+.case-section h3 {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 11px;
+  color: #ff77c6;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed #4a2a4a;
+  text-transform: uppercase;
+}
+.case-section p {
+  font-family: 'VT323', monospace;
+  font-size: 21px;
+  color: #e8d8e8;
+  line-height: 1.55;
+  margin-bottom: 12px;
+}
+.case-section p:last-child { margin-bottom: 0; }
+.case-section ul {
+  list-style: none;
+  font-family: 'VT323', monospace;
+  font-size: 21px;
+  color: #e8d8e8;
+  line-height: 1.5;
+  padding-left: 4px;
+}
+.case-section ul li {
+  position: relative;
+  padding-left: 22px;
+  margin-bottom: 10px;
+}
+.case-section ul li::before {
+  content: '\25B8';
+  position: absolute;
+  left: 0;
+  color: #ff77c6;
+}
+.case-section em {
+  color: #ffb3ff;
+  font-style: normal;
+  background: rgba(204,0,119,0.18);
+  padding: 0 4px;
+}
+
+.case-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin: 4px 0 4px;
+}
+.case-metric {
+  background: rgba(204,0,119,0.10);
+  border: 1px solid #4a2a4a;
+  padding: 12px 14px;
+}
+.case-metric-num {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 14px;
+  color: #ff77c6;
+  display: block;
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+.case-metric-label {
+  font-family: 'VT323', monospace;
+  font-size: 17px;
+  color: #c8b8c8;
+  line-height: 1.35;
+}
+
+.case-video {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+  border: 2px solid #4a2a4a;
+  background: #000;
+  cursor: pointer;
+  text-decoration: none;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+.case-video:hover {
+  border-color: #ff77c6;
+  box-shadow: 0 0 16px rgba(204,0,119,0.45);
+}
+.case-video-thumb {
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  background: #111;
+}
+.case-video-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.75);
+  border: 2px solid #ff77c6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffb3ff;
+  font-size: 22px;
+  padding-left: 6px;
+  box-shadow: 0 0 18px rgba(204,0,119,0.6);
+  transition: all 0.2s;
+  pointer-events: none;
+}
+.case-video:hover .case-video-play {
+  background: #cc0077;
+  color: #fff;
+  transform: translate(-50%, -50%) scale(1.08);
+}
+.case-video-caption {
+  font-family: 'VT323', monospace;
+  font-size: 18px;
+  color: #a89aa8;
+  text-align: center;
+  margin-top: 8px;
+  font-style: italic;
+}
+
+.case-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 4px 24px 24px;
+}
+.case-buttons .prod-btn {
+  margin-top: 0;
+  display: inline-block;
+  padding: 8px 20px;
+  background: none;
+  border: 2px solid var(--content-border);
+  color: #ffb3ff;
+  font-family: 'VT323', monospace;
+  font-size: 22px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.case-buttons .prod-btn:hover {
+  background: rgba(204,0,119,0.18);
+  box-shadow: 0 0 12px rgba(204,0,119,0.4);
+}
+
+.case-quote {
+  border-left: 3px solid #ff77c6;
+  padding: 4px 0 4px 14px;
+  margin: 4px 0 12px;
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  color: #e0b3ff;
+  font-style: italic;
+  line-height: 1.45;
+}
+
+/* "my work" window (auto-opens after splash) */
+.xp-window-body:has(> .mywork-window) { padding: 0; background: #1a0028; overflow: auto; }
+.mywork-window { padding: 22px 24px 24px; }
+.mywork-intro {
+  font-family: 'VT323', monospace;
+  font-size: 22px;
+  color: #e8d8e8;
+  line-height: 1.5;
+  margin-bottom: 18px;
+}
+.mywork-intro strong { color: #ffb3ff; }
+.mywork-card {
+  background: rgba(204,0,119,0.08);
+  border: 1px solid #4a2a4a;
+  padding: 16px 18px;
+  margin-bottom: 14px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.mywork-card:hover {
+  background: rgba(204,0,119,0.18);
+  border-color: #ff77c6;
+  box-shadow: 0 0 12px rgba(204,0,119,0.3);
+}
+.mywork-card-title {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  color: #ffb3ff;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+.mywork-card-title .mw-icon { margin-right: 8px; }
+.mywork-card-tag {
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  color: #e0b3ff;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.mywork-card-desc {
+  font-family: 'VT323', monospace;
+  font-size: 19px;
+  color: #c8b8c8;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+.mywork-card-stats {
+  font-family: 'VT323', monospace;
+  font-size: 18px;
+  color: #ff77c6;
+  line-height: 1.4;
+  letter-spacing: 0.3px;
+}
+.mywork-cta {
+  display: inline-block;
+  margin-top: 10px;
+  font-family: 'VT323', monospace;
+  font-size: 19px;
+  color: #ffb3ff;
+  letter-spacing: 0.5px;
+}
+.mywork-footer {
+  font-family: 'VT323', monospace;
+  font-size: 18px;
+  color: #a89aa8;
+  font-style: italic;
+  text-align: center;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px dashed #4a2a4a;
+  line-height: 1.45;
+}
+
+/* Featured product icon glow on desktop */
+.desktop-icon.featured .icon-img {
+  text-shadow: 0 0 14px rgba(255,119,198,0.85), 0 0 4px rgba(255,179,255,0.6);
+  animation: featuredPulse 2.6s ease-in-out infinite;
+}
+.desktop-icon.featured .icon-label {
+  color: #ffd9ee;
+  text-shadow: 0 0 8px rgba(255,119,198,0.6), 1px 1px 0 #000;
+}
+@keyframes featuredPulse {
+  0%, 100% { filter: drop-shadow(0 0 4px rgba(255,119,198,0.5)); }
+  50%      { filter: drop-shadow(0 0 12px rgba(255,119,198,0.95)); }
+}
+
 /* Arcade / Hobbies */
 .xp-window-body:has(.arcade-root) { padding: 0; background: #050510; overflow: auto; }
 .arcade-root { min-height: 100%; }
@@ -1733,10 +1985,10 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: Tahoma, G
       <div class="wizard-text">
         <div class="wt-heading">OH! So you clicked into my portfolio! <span class="shimmer">WELCOME!</span></div>
         <div class="wt-body">
-          You've just entered <strong>Galaxy's</strong> desktop. Here's how this works:
+          You've just entered <strong>Galaxy's</strong> desktop. I'm a product builder, so <strong>my work</strong> will auto-open in a sec with my case studies. Here's how the rest of this works:
           <ul>
+            <li>Top-left icons (glowing pink) are my product work</li>
             <li>Double-click any folder to open it</li>
-            <li>Click any file inside to view my work</li>
             <li>Drag windows around to make it your own</li>
             <li>Right-click the desktop for secret options</li>
             <li>Close any window with the X button</li>
@@ -1761,45 +2013,49 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: Tahoma, G
   <div id="desktop-overlay"></div>
 
   <div id="desktop-icons">
-    <div class="desktop-icon" data-folder="games" ondblclick="openHobbies()">
-      <div class="icon-img">&#127918;</div>
-      <div class="icon-label">Games</div>
+    <div class="desktop-icon featured" data-folder="mywork" ondblclick="openMyWork()">
+      <div class="icon-img">&#128188;</div>
+      <div class="icon-label">my work</div>
+    </div>
+    <div class="desktop-icon featured" data-folder="roadmap" ondblclick="openRoadmap()">
+      <div class="icon-img">&#129517;</div>
+      <div class="icon-label">Roadmapping Tool</div>
+    </div>
+    <div class="desktop-icon featured" data-folder="racks" ondblclick="openRacks()">
+      <div class="icon-img">&#128087;</div>
+      <div class="icon-label">Racks</div>
     </div>
     <div class="desktop-icon" data-folder="about" ondblclick="openFolder('about')">
       <div class="icon-img">&#128100;</div>
       <div class="icon-label">about me</div>
     </div>
-    <div class="desktop-icon" data-folder="music" ondblclick="openMusic()">
-      <div class="icon-img">&#127925;</div>
-      <div class="icon-label">music</div>
-    </div>
-    <div class="desktop-icon" data-folder="cats" ondblclick="openPuckShrine()">
-      <div class="icon-img">&#128008;</div>
-      <div class="icon-label">Puck's Shrine</div>
-    </div>
     <div class="desktop-icon" ondblclick="openBrowser('LinkedIn', 'https://www.linkedin.com/in/galaxy-pham/', 'img:linkedin.png')">
       <div class="icon-img"><img src="linkedin.png" alt="LinkedIn"></div>
       <div class="icon-label">LinkedIn</div>
-    </div>
-    <div class="desktop-icon" ondblclick="openBrowser('Notion', 'https://galaxypham.notion.site/Galaxy-Pham-Portfolio-368f0caa384e80778c37ce382ee332d1?pvs=73', 'img:notion.png')">
-      <div class="icon-img"><img src="notion.png" alt="Notion"></div>
-      <div class="icon-label">Notion</div>
     </div>
     <div class="desktop-icon" ondblclick="openBrowser('GitHub', 'https://github.com/Galaxypham', 'img:github.png')">
       <div class="icon-img"><img src="github.png" alt="GitHub"></div>
       <div class="icon-label">GitHub</div>
     </div>
-    <div class="desktop-icon" data-folder="roadmap" ondblclick="openRoadmap()">
-      <div class="icon-img">&#129517;</div>
-      <div class="icon-label">Roadmapping Tool</div>
-    </div>
-    <div class="desktop-icon" data-folder="racks" ondblclick="openRacks()">
-      <div class="icon-img">&#128087;</div>
-      <div class="icon-label">Racks</div>
+    <div class="desktop-icon" ondblclick="openBrowser('Notion', 'https://galaxypham.notion.site/Galaxy-Pham-Portfolio-368f0caa384e80778c37ce382ee332d1?pvs=73', 'img:notion.png')">
+      <div class="icon-img"><img src="notion.png" alt="Notion"></div>
+      <div class="icon-label">Notion</div>
     </div>
     <div class="desktop-icon" data-folder="bakery" ondblclick="openBakery()">
       <div class="icon-img">&#127874;</div>
       <div class="icon-label">my cakes</div>
+    </div>
+    <div class="desktop-icon" data-folder="music" ondblclick="openMusic()">
+      <div class="icon-img">&#127925;</div>
+      <div class="icon-label">music</div>
+    </div>
+    <div class="desktop-icon" data-folder="games" ondblclick="openHobbies()">
+      <div class="icon-img">&#127918;</div>
+      <div class="icon-label">Games</div>
+    </div>
+    <div class="desktop-icon" data-folder="cats" ondblclick="openPuckShrine()">
+      <div class="icon-img">&#128008;</div>
+      <div class="icon-label">Puck's Shrine</div>
     </div>
     <div class="desktop-icon" data-folder="recycle" ondblclick="openRecycleBin()" oncontextmenu="showRecycleBinMenu(event)">
       <div class="icon-img">&#128465;&#65039;</div>
@@ -1827,11 +2083,23 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: Tahoma, G
     <div>Galaxy</div>
   </div>
   <div class="sm-items">
+    <div class="sm-item" onclick="openMyWork();closeStartMenu()">
+      <span class="sm-icon">&#128188;</span>
+      <span>My Work</span>
+    </div>
+    <div class="sm-item" onclick="openRoadmap();closeStartMenu()">
+      <span class="sm-icon">&#129517;</span>
+      <span>Roadmapping Tool (case study)</span>
+    </div>
+    <div class="sm-item" onclick="openRacks();closeStartMenu()">
+      <span class="sm-icon">&#128087;</span>
+      <span>Racks (case study)</span>
+    </div>
+    <div class="sm-divider"></div>
     <div class="sm-item" onclick="resetIconLayout()">
       <span class="sm-icon">&#128260;</span>
       <span>Reset desktop layout</span>
     </div>
-    <div class="sm-divider"></div>
     <div class="sm-item" onclick="openAboutSite();closeStartMenu()">
       <span class="sm-icon">&#128187;</span>
       <span>About this site</span>
@@ -2251,41 +2519,173 @@ function openFile(folderKey, fileName) {
 /* ============================
    PRODUCT SHOWCASE
    ============================ */
+function openMyWork() {
+  const html = `<div class="mywork-window">
+    <div class="mywork-intro">
+      Hi, I\u2019m <strong>Galaxy</strong>. I build operational products that make messy processes visible and traceable. Here\u2019s what I\u2019ve shipped.
+    </div>
+
+    <div class="mywork-card" onclick="openRoadmap()">
+      <div class="mywork-card-title"><span class="mw-icon">\uD83E\uDDD9</span>Roadmapping Tool</div>
+      <div class="mywork-card-tag">Product intake and roadmap system, originally built at Meta</div>
+      <div class="mywork-card-desc">A single source of truth for product requests across business requestors, PMs, and leadership. Rebuilt as an open template so any product team can fork it.</div>
+      <div class="mywork-card-stats">95% on-time delivery \u00b7 100\u2013150 requests/half \u00b7 6 global regions</div>
+      <div class="mywork-cta">\u25B8 Open case study</div>
+    </div>
+
+    <div class="mywork-card" onclick="openRacks()">
+      <div class="mywork-card-title"><span class="mw-icon">\uD83D\uDC54</span>Racks</div>
+      <div class="mywork-card-tag">Mobile-first AI inventory app for vintage resellers</div>
+      <div class="mywork-card-desc">A 0-to-1 founder build. Uses Gemini for image classification and gives resellers real analytics on what is actually selling.</div>
+      <div class="mywork-card-stats">5 min \u2192 15 sec per item \u00b7 70% retention \u00b7 100+ user interviews</div>
+      <div class="mywork-cta">\u25B8 Open case study</div>
+    </div>
+
+    <div class="mywork-footer">
+      P.S. Snoop around the rest of the desktop when you\u2019re done. There\u2019s cake, cats, and a music player too.
+    </div>
+  </div>`;
+  createWindow('my work.exe', '\uD83D\uDCBC', html, { width: 540, height: 560 });
+}
+
 function openRacks() {
   const url = 'https://galaxypham.github.io/racks/';
+  const repo = 'https://github.com/Galaxypham/racks';
   const html = `<div class="product-window">
     <div class="product-header">
       <div class="prod-icon">&#128087;</div>
       <div class="prod-name">Racks</div>
-      <div class="prod-tagline">inventory management + analytics for vintage resellers</div>
+      <div class="prod-tagline">Mobile-first AI inventory app for vintage resellers.</div>
       <div class="prod-desc">
-        Vintage is uniquely hard to track: every item is a one-of-a-kind SKU, and when you\u2019re managing hundreds or thousands of pieces, knowing what sells, what\u2019s sitting stale, and what to restock becomes nearly impossible without the right tooling.<br><br>
-        Racks solves that. It uses Gemini AI to help categorize and organize inventory automatically, and gives resellers real data on their stock so they can make smarter buying and selling decisions.
+        Vintage reselling has a quiet operational problem: every item is a one-of-a-kind SKU. After a sourcing day, a reseller walks home with hundreds of pieces and has to track each one through every stage: unclean, washed, priced, on the floor, sold. Most resellers (myself included) lived in a tangle of Google Sheets, screenshots, and memory. That system breaks the moment inventory scales past a few hundred items.<br><br>
+        I built Racks for myself first, then realized other resellers had the exact same problem.
       </div>
-      <div class="prod-note">Note: this is the MVP I built myself. Racks has since been rewritten to scale by my co-founder Tiffany, who architected the full backend. This is my personal build.</div>
-      <button class="prod-btn" onclick="window.open('${url}','_blank')">\u2197 open in new tab</button>
+    </div>
+
+    <div class="case-section">
+      <h3>My Role</h3>
+      <p>Founder. I built the MVP solo using Cursor and Claude Sonnet, deployed it on GitHub Pages, and used Gemini 2.0 for image classification. After validating the product with real users, I brought on a technical co-founder to architect the scaling version on Supabase. The build linked in this portfolio is my personal MVP, kept public so PMs can interact with the work I personally shipped.</p>
+    </div>
+
+    <div class="case-section">
+      <h3>Key Product Decisions</h3>
+      <ul>
+        <li><em>Mobile-first</em>, because resellers work on the go: sourcing days, pop-ups, and tabling all happen from a phone.</li>
+        <li><em>Gemini over other LLMs</em>: it had the strongest image recognition at MVP time, and I wanted to integrate Google\u2019s reverse image search for pricing comps long-term.</li>
+        <li><em>Supabase over Firebase</em>: we started in the Google ecosystem but Supabase was more affordable for a bootstrapped company.</li>
+        <li><em>Cut the personal-cache approach</em> once it became clear it could not scale to commercial use. We rewrote the persistence layer with a co-founder rather than limping forward with the original architecture.</li>
+        <li><em>Founder-led onboarding</em>: I show up at customer warehouses and personally capture thousands of items. It is slow, but it locks in retention and surfaces bottlenecks I cannot see from the UI alone.</li>
+      </ul>
+    </div>
+
+    <div class="case-section">
+      <h3>Numbers</h3>
+      <div class="case-metrics">
+        <div class="case-metric"><span class="case-metric-num">5 min \u2192 15 sec</span><span class="case-metric-label">Manual processing time per item, cut by AI classification</span></div>
+        <div class="case-metric"><span class="case-metric-num">70%</span><span class="case-metric-label">Retention among in-person onboarded users, identified via cohort segmentation</span></div>
+        <div class="case-metric"><span class="case-metric-num">100+</span><span class="case-metric-label">User interviews and contextual inquiry sessions feeding the roadmap</span></div>
+        <div class="case-metric"><span class="case-metric-num">7 / 10</span><span class="case-metric-label">Active vs. onboarded users on the scaling version (intentionally selective rollout)</span></div>
+      </div>
+    </div>
+
+    <div class="case-section">
+      <h3>What\u2019s Next</h3>
+      <ul>
+        <li><em>Design overhaul</em>: the Y2K maximalist look is my taste, but it is the wrong cognitive load for a reseller processing 200 items in a single sitting.</li>
+        <li><em>Bulk image classification</em>: lay five shirts on the floor, snap one photo, get five SKUs. This removes the single biggest onboarding bottleneck.</li>
+        <li><em>Freemium tier</em>, once we have the bandwidth for a less hands-on rollout.</li>
+      </ul>
+    </div>
+
+    <div class="case-section">
+      <h3>Why It Matters</h3>
+      <p>Most of the vintage reselling market is fifteen to twenty-five year olds running real businesses without the operational tooling that would help them learn how to run real businesses. Racks is partly an inventory app and partly a \u201cyou can do this professionally\u201d tool. I would have killed for it when I started reselling.</p>
+    </div>
+
+    <div class="case-section">
+      <h3>Demo</h3>
+      <a class="case-video" href="https://www.youtube.com/shorts/rw_uApxBhhw" target="_blank" rel="noopener" title="Watch the Racks demo on YouTube">
+        <img class="case-video-thumb" src="https://img.youtube.com/vi/rw_uApxBhhw/hqdefault.jpg" alt="Racks demo video" loading="lazy">
+        <div class="case-video-play">\u25B6</div>
+      </a>
+      <div class="case-video-caption">Click to watch the 60-second walkthrough on YouTube</div>
+    </div>
+
+    <div class="case-buttons">
+      <button class="prod-btn" onclick="window.open('${url}','_blank')">\u2197 View live MVP (GitHub Pages)</button>
+      <button class="prod-btn" onclick="window.open('${repo}','_blank')">\u2197 View repo on GitHub</button>
     </div>
   </div>`;
-  createWindow('Racks: Vintage Inventory App', '&#128087;', html, { width: 580, height: 440 });
+  createWindow('Racks: Case Study', '&#128087;', html, { width: 620, height: 640 });
 }
 
 function openRoadmap() {
   const url = 'https://roadmapping-tool-seven.vercel.app/welcome';
+  const launchKit = 'https://galaxypham.notion.site/Roadmapping-Tool-Launch-Kits-366f0caa384e80ac95c3ebd8d05f9891?pvs=143';
   const html = `<div class="product-window">
     <div class="product-header">
       <div class="prod-icon">&#129517;</div>
       <div class="prod-name">Roadmapping Tool</div>
-      <div class="prod-tagline">product intake + roadmapping system</div>
+      <div class="prod-tagline">Product intake and roadmapping system. Built at Meta, rebuilt as an open template.</div>
       <div class="prod-desc">
-        A product intake and roadmapping system built to make the full request pipeline visible and traceable, so nothing falls through the cracks and no one has to side-channel engineering just to get heard.<br><br>
-        I built the original version of this internally at Meta. Requests came in from everywhere, priorities shifted quietly, and teams had no single source of truth for what was actually being worked on or why. This tool was built to fix that.<br><br>
-        This is not a replica of the internal tool. I rebuilt it as an open template so other product people facing the same problems can fork the repo and make their own version.
+        At Meta, I owned the full enterprise tooling launch calendar across <em>six global regions</em>, triaging <em>100 to 150 requests per half</em> across Security, Finance, Compliance, and Business Development, without direct authority over any contributing engineering team.<br><br>
+        The intake process had a specific failure pattern. Stakeholders DM\u2019d friends in engineering directly. Requests lived in email threads invisible to anyone not cc\u2019d. When someone took PTO or left the company, their work in flight vanished with them. Requestors had no visibility into the queue, so reasonable deprioritization looked like being ignored, and trust eroded.
       </div>
-      <div class="prod-note">Note: this is a template, not the original internal tool. If you are a PM or ops person dealing with the same intake chaos, feel free to use the repo and make it your own.</div>
-      <button class="prod-btn" onclick="window.open('${url}','_blank')">\u2197 open in new tab</button>
+      <div class="case-quote">Most people read this as a prioritization problem. It is not. It is a visibility problem. Requestors do not bypass PMs because they disagree with the framework. They bypass PMs because they cannot see the pipeline and do not trust it.</div>
+    </div>
+
+    <div class="case-section">
+      <h3>My Role</h3>
+      <p>PM and Product Owner. I set the business requirements, shadowed every stakeholder type (business requestor, PM, leadership) to understand the actual day-to-day pain, and built the standardized process around three personas. I worked closely with engineering to determine what could be enforced via tooling versus what had to live in process.</p>
+    </div>
+
+    <div class="case-section">
+      <h3>The Three Roles</h3>
+      <ul>
+        <li><em>Business Requestor</em>: the person asking for the work. Lands on \u201cMy Submissions.\u201d</li>
+        <li><em>Product Manager</em>: the person who owns the roadmap. Lands on \u201cNeeds Triage.\u201d</li>
+        <li><em>Leadership</em>: needs high-level signal without pinging a PM. Lands on \u201cOn the Roadmap.\u201d</li>
+      </ul>
+      <p>Each role only sees what they need, and each role lands on the view most relevant to their job. Low friction, high trust.</p>
+    </div>
+
+    <div class="case-section">
+      <h3>Key Product Decisions</h3>
+      <ul>
+        <li><em>Visibility is the product</em>. The entire tool is built so nobody ever has to ask \u201cwhat is the status of my request\u201d again.</li>
+        <li><em>Reason-required writes</em> on every status change. Decisions are never made silently.</li>
+        <li><em>Field-level revision history</em> with before-and-after diffs. Reconstructing context from a Slack thread three weeks later is no longer necessary.</li>
+        <li><em>Industry-standard RICE</em> (Intercom, 2017): Reach \u00d7 Impact \u00d7 Confidence \u00f7 Effort. No per-dimension weight knobs, because they break cross-team comparability. The only knob is each team\u2019s roadmap threshold.</li>
+        <li><em>Backend-shaped architecture</em>, even though the demo runs in localStorage. Graduating to a real database is a focused refactor, not a rewrite.</li>
+      </ul>
+    </div>
+
+    <div class="case-section">
+      <h3>Impact at Meta</h3>
+      <div class="case-metrics">
+        <div class="case-metric"><span class="case-metric-num">95%</span><span class="case-metric-label">On-time delivery in the first year after launching the process</span></div>
+        <div class="case-metric"><span class="case-metric-num">100\u2013150</span><span class="case-metric-label">Requests processed per half across 6 global regions</span></div>
+        <div class="case-metric"><span class="case-metric-num">96%</span><span class="case-metric-label">Self-service resolution rate within 3 months on the adjacent LLM automation alpha-to-GA</span></div>
+        <div class="case-metric"><span class="case-metric-num">3 hr \u2192 30 min</span><span class="case-metric-label">Weekly onboarding time for Global Security Dept. across 40,000 employees (83% reduction)</span></div>
+      </div>
+    </div>
+
+    <div class="case-section">
+      <h3>Why I Rebuilt It as a Template</h3>
+      <p>The internal Meta version is not portable, and the underlying problem is everywhere. Most product orgs solve intake with a Notion table and good intentions. I wanted to give other teams a defensible, opinionated starting point: RICE done correctly, audit trail built in, role-aware views, and no weight knobs to argue about. Fork it, swap the seed data, and you have a credible intake process in an afternoon.</p>
+    </div>
+
+    <div class="case-section">
+      <h3>Under the Hood</h3>
+      <p>React 18, Vite, Tailwind, @dnd-kit, jsPDF, and localStorage persistence. Ships with a full launch kit in the repo, including OKRs, RACI, a risk log, a rollback plan, a 30-day metrics dashboard, a 5-minute demo script, and a retro template. The data model is backend-shaped so the tool can graduate to a real database without a rewrite.</p>
+    </div>
+
+    <div class="case-buttons">
+      <button class="prod-btn" onclick="window.open('${url}','_blank')">\u2197 View live tool</button>
+      <button class="prod-btn" onclick="window.open('${launchKit}','_blank')">\u2197 Read the launch kit</button>
     </div>
   </div>`;
-  createWindow('Roadmapping Tool', '&#128506;', html, { width: 580, height: 460 });
+  createWindow('Roadmapping Tool: Case Study', '&#129517;', html, { width: 620, height: 680 });
 }
 
 /* ============================
@@ -2754,10 +3154,17 @@ function spawnFakePopup(data, index) {
 
 function dismissSplash() {
   const splash = document.getElementById('splash-screen');
+  if (splash.dataset.dismissed === '1') return;
+  splash.dataset.dismissed = '1';
   splash.querySelectorAll('.fake-popup').forEach(p => p.remove());
   splash.style.transition = 'opacity 0.3s';
   splash.style.opacity = '0';
-  setTimeout(() => splash.style.display = 'none', 300);
+  setTimeout(() => {
+    splash.style.display = 'none';
+    if (typeof openMyWork === 'function') {
+      setTimeout(() => openMyWork(), 250);
+    }
+  }, 300);
 }
 
 /* ============================
