@@ -30,142 +30,183 @@
 
 html, body { width: 100%; height: 100%; overflow: hidden; font-family: Tahoma, Geneva, Verdana, sans-serif; }
 
-/* ===== MOBILE OVERLAY ===== */
-/* ===== MOBILE PAGE ===== */
+/* ===== MOBILE PAGE (professional one-pager) ===== */
 #mobile-overlay {
   display: none;
   position: fixed; inset: 0;
-  background: #1a0028;
+  background: #faf8f5;
+  color: #1a1a1f;
   z-index: 99999;
   overflow-y: auto;
   flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 @media (max-width: 768px) {
   #mobile-overlay { display: flex; }
 }
-.mob { font-family: 'VT323', monospace; color: #fff0f8; }
-.mob-header {
-  background: linear-gradient(135deg, #1a0028 0%, #3a0050 100%);
-  padding: 40px 24px 28px;
-  text-align: center;
-  border-bottom: 2px solid #cc0077;
+
+.mob-notice {
+  background: #1a1a1f;
+  color: #fafafa;
+  padding: 14px 20px;
+  font-size: 13px;
+  line-height: 1.5;
+  border-bottom: 3px solid #cc0077;
   flex-shrink: 0;
 }
-.mob-header .mob-name {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 13px; color: #ffb3ff;
-  line-height: 2; margin-bottom: 8px;
+.mob-notice strong { color: #ffb3d9; display: block; margin-bottom: 4px; font-size: 12px; letter-spacing: 0.5px; text-transform: uppercase; }
+
+.mob-hero {
+  padding: 36px 24px 28px;
+  text-align: center;
+  background: #fff;
+  border-bottom: 1px solid #ececec;
 }
-.mob-header .mob-tagline {
-  font-family: 'VT323', monospace;
-  font-size: 20px; color: #e0b3ff;
-}
-.mob-header .mob-avatar {
-  width: 80px; height: 80px;
+.mob-hero-photo {
+  width: 140px; height: 140px;
   border-radius: 50%;
-  background: url('me-thumb.png') center/cover #3a0050;
-  border: 3px solid #cc0077;
-  margin: 0 auto 16px;
+  object-fit: cover;
+  margin: 0 auto 18px;
+  display: block;
+  border: 3px solid #fff;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  background: #e8e8e8;
 }
-.mob-section {
-  padding: 24px 20px;
-  border-bottom: 2px dashed #44006a;
+.mob-hero-name {
+  font-size: 26px;
+  font-weight: 700;
+  color: #1a1a1f;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
 }
-.mob-section h2 {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 8px; color: #cc0077;
-  margin-bottom: 14px; line-height: 1.8;
+.mob-hero-role {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
 }
-.mob-section p {
-  font-family: 'VT323', monospace;
-  font-size: 19px; color: #fff0f8;
-  line-height: 1.5; margin-bottom: 8px;
+
+.mob-block {
+  padding: 32px 24px;
+  border-bottom: 1px solid #ececec;
 }
-.mob-section em { color: #ffb3ff; font-style: normal; }
-.mob-facts { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
-.mob-fact {
-  background: rgba(204,0,119,0.1);
-  border: 1px solid #cc0077;
-  padding: 8px 12px;
-  font-family: 'VT323', monospace;
-  font-size: 17px; color: #fff0f8;
-  line-height: 1.4;
+.mob-block h2 {
+  font-size: 11px;
+  font-weight: 700;
+  color: #cc0077;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
 }
-.mob-fact span {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 6px; color: #cc0077;
-  display: block; margin-bottom: 4px;
-}
-.mob-card {
-  background: rgba(255,255,255,0.05);
-  border: 2px solid #cc0077;
-  padding: 14px 16px;
+.mob-block p {
+  font-size: 15px;
+  color: #2a2a30;
+  line-height: 1.65;
   margin-bottom: 12px;
 }
-.mob-card .mc-icon { font-size: 28px; margin-bottom: 6px; }
-.mob-card .mc-name {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 8px; color: #ffb3ff;
-  margin-bottom: 8px; line-height: 1.8;
+.mob-block em { color: #cc0077; font-style: normal; font-weight: 600; }
+
+.mob-project {
+  padding: 18px 0;
+  border-bottom: 1px solid #f0f0f0;
 }
-.mob-card .mc-desc {
-  font-family: 'VT323', monospace;
-  font-size: 17px; color: #ccc;
-  line-height: 1.4; margin-bottom: 10px;
+.mob-project:last-child { border-bottom: none; }
+.mob-project h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1f;
+  margin-bottom: 6px;
 }
-.mob-card .mc-btn {
+.mob-project .mob-project-sub {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.mob-project p {
+  font-size: 14px;
+  color: #4a4a50;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+.mob-project-link {
   display: inline-block;
-  padding: 6px 14px;
-  background: none;
-  border: 2px solid #cc0077;
-  color: #ffb3ff;
-  font-family: 'VT323', monospace;
-  font-size: 18px; cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: #cc0077;
   text-decoration: none;
+  padding: 8px 16px;
+  border: 1.5px solid #cc0077;
+  border-radius: 4px;
+  transition: all 0.15s;
 }
-.mob-card .mc-btn:hover { background: rgba(204,0,119,0.2); }
-.mob-gallery { display: flex; flex-direction: column; gap: 0; }
+.mob-project-link:active { background: #cc0077; color: #fff; }
+
+.mob-gallery { display: flex; flex-direction: column; }
 .mob-gallery-main {
-  width: 100%; aspect-ratio: 4/3;
-  object-fit: cover;
-  border: 2px solid #cc0077;
-  background: #2a0020;
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: contain;
+  border-radius: 6px;
+  background: #f2f0ec;
   display: block;
 }
-.mob-gallery-thumbs {
-  display: flex; gap: 6px;
-  overflow-x: auto; padding: 8px 0;
-}
-.mob-gallery-thumbs img {
-  width: 60px; height: 60px;
-  object-fit: cover;
-  border: 2px solid #44006a;
-  cursor: pointer; flex-shrink: 0;
-}
-.mob-gallery-thumbs img.active { border-color: #cc0077; }
 .mob-gallery-caption {
-  font-family: 'VT323', monospace;
-  font-size: 17px; color: #e0b3ff;
-  padding: 6px 0; text-align: center;
+  font-size: 13px;
+  color: #666;
+  padding: 10px 0 6px;
+  text-align: center;
+  font-style: italic;
 }
-.mob-links { display: flex; flex-direction: column; gap: 10px; padding-bottom: 40px; }
+.mob-gallery-thumbs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 0;
+  scrollbar-width: none;
+}
+.mob-gallery-thumbs::-webkit-scrollbar { display: none; }
+.mob-gallery-thumbs img {
+  width: 56px; height: 56px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+  opacity: 0.6;
+  transition: all 0.15s;
+}
+.mob-gallery-thumbs img.active { border-color: #cc0077; opacity: 1; }
+
+.mob-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 .mob-link {
-  display: flex; align-items: center; gap: 12px;
-  padding: 12px 16px;
-  background: rgba(255,255,255,0.05);
-  border: 2px solid #cc0077;
-  color: #ffb3ff;
-  font-family: 'VT323', monospace;
-  font-size: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: #fff;
+  border: 1px solid #e4e4e4;
+  border-radius: 8px;
+  color: #1a1a1f;
+  font-size: 15px;
+  font-weight: 500;
   text-decoration: none;
 }
-.mob-link img { width: 24px; height: 24px; object-fit: contain; }
-.mob-link:hover { background: rgba(204,0,119,0.15); }
-.mob-nav-hint {
+.mob-link img { width: 22px; height: 22px; object-fit: contain; }
+.mob-link .mob-link-arrow { margin-left: auto; color: #aaa; font-size: 18px; }
+.mob-link:active { background: #f5f5f5; }
+
+.mob-footer {
   text-align: center;
-  font-family: 'Press Start 2P', cursive;
-  font-size: 7px; color: #66336a;
-  padding: 16px; line-height: 2;
+  padding: 28px 24px 40px;
+  font-size: 12px;
+  color: #999;
+  line-height: 1.6;
 }
 
 /* ===== DESKTOP ===== */
@@ -1089,94 +1130,78 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: Tahoma, G
 </head>
 <body>
 
-<!-- MOBILE OVERLAY -->
+<!-- MOBILE OVERLAY (professional one-pager) -->
 <div id="mobile-overlay">
-  <!-- HEADER -->
-  <div class="mob-header">
-    <div class="mob-avatar"></div>
-    <div class="mob-name">Galaxy Pham</div>
-    <div class="mob-tagline">product builder &middot; professional chef &middot; founder of &aacute;o archive</div>
+
+  <!-- DESKTOP NOTICE -->
+  <div class="mob-notice">
+    <strong>A quick note</strong>
+    My portfolio is designed to be experienced on a desktop &mdash; the full version is an interactive Windows XP environment that I think really showcases my personality. This mobile page is a lightweight introduction; please open the desktop version when you have a moment. &#10024;
+  </div>
+
+  <!-- HERO -->
+  <div class="mob-hero">
+    <img class="mob-hero-photo" src="me-mobile.jpg" alt="Galaxy Pham" onerror="this.onerror=null;this.src='me.png'">
+    <h1 class="mob-hero-name">Galaxy Pham</h1>
+    <p class="mob-hero-role">Product Builder &middot; Professional Chef &middot; Founder of &aacute;o archive</p>
   </div>
 
   <!-- ABOUT -->
-  <div class="mob-section">
-    <h2>&#128075; about me</h2>
-    <p>Hi there! I&rsquo;m Galaxy, a product builder, fashion and vintage enthusiast, and professional chef. Yes, all three. Yes, at the same time.</p>
-    <p>I&rsquo;ve always been obsessed with learning how things work. Growing up, I had <em>Unwrapped</em> and <em>How It&rsquo;s Made</em> on repeat. I was that kid. Looking back, it makes total sense: I build operational products for a living, I cook at a professional level, and I run my own vintage resell business called <em>&aacute;o archive</em>. They&rsquo;re all deeply process-driven, and I love that about them.</p>
-  </div>
+  <section class="mob-block">
+    <h2>About</h2>
+    <p>Hi, I&rsquo;m Galaxy &mdash; a product builder, professional chef, and founder of a vintage resell business called <em>&aacute;o archive</em>.</p>
+    <p>I&rsquo;ve always been obsessed with how things work. I build operational products for a living, cook at a professional level, and run a vintage business on the side. They&rsquo;re all deeply process-driven, and that&rsquo;s the thread that ties everything I do together.</p>
+  </section>
 
-  <!-- FUN FACTS -->
-  <div class="mob-section">
-    <h2>&#10024; fun facts</h2>
-    <div class="mob-facts">
-      <div class="mob-fact"><span>01</span>I am an introverted extrovert. I will be the life of the party and then need three business days to recover.</div>
-      <div class="mob-fact"><span>02</span>Fish sauce in tomato sauce spaghetti is genuinely one of the best things I have ever made. Very Viet of me, and I stand by it.</div>
-      <div class="mob-fact"><span>03</span>I once found a mint condition AllSaints leather bag at a Savers for $16. Retail: $400. This is what &aacute;o archive is built on.</div>
-      <div class="mob-fact"><span>04</span>Racks was the first app I ever built entirely by myself. Very proud of that one.</div>
-      <div class="mob-fact"><span>05</span>I was eating sardines before the 2025 craze. I&rsquo;m not NOT saying I&rsquo;m a trendsetter.</div>
-      <div class="mob-fact"><span>06</span>Bucket list: visit sardine canning factories in Portugal. Yes, this is a real goal. Yes, I am serious.</div>
-      <div class="mob-fact"><span>07</span>Hot take: corn should be on everything. This is not up for debate.</div>
-    </div>
-  </div>
+  <!-- WORK -->
+  <section class="mob-block">
+    <h2>Selected Work</h2>
 
-  <!-- PHOTOS OF ME -->
-  <div class="mob-section">
-    <h2>&#128248; photos</h2>
-    <div class="mob-gallery">
-      <img class="mob-gallery-main" id="mob-me-main" src="Photos%20of%20me/finding%20the%20BIGGEST%20LEMON%20AND%20LIME.jpg" alt="photo">
-      <div class="mob-gallery-caption" id="mob-me-caption">finding the biggest lemon and lime &#127819;</div>
-      <div class="mob-gallery-thumbs" id="mob-me-thumbs"></div>
+    <div class="mob-project">
+      <h3>Racks</h3>
+      <div class="mob-project-sub">Inventory app &middot; founder build</div>
+      <p>Inventory management and analytics for vintage resellers, powered by Gemini AI. Helps sellers categorize one-of-a-kind SKUs and make smarter buying and selling decisions.</p>
+      <a class="mob-project-link" href="https://galaxypham.github.io/racks/" target="_blank">View project &rarr;</a>
     </div>
-  </div>
 
-  <!-- MY WORK -->
-  <div class="mob-section">
-    <h2>&#128640; my work</h2>
-    <div class="mob-card">
-      <div class="mc-icon">&#128087;</div>
-      <div class="mc-name">Racks</div>
-      <div class="mc-desc">Inventory management and analytics for vintage resellers, powered by Gemini AI.</div>
-      <a class="mc-btn" href="https://galaxypham.github.io/racks/" target="_blank">open Racks &#8594;</a>
+    <div class="mob-project">
+      <h3>Roadmapping Tool</h3>
+      <div class="mob-project-sub">Product ops &middot; open template</div>
+      <p>A product intake and roadmapping system that makes the full request pipeline visible and traceable. Originally built internally at Meta, rebuilt here as an open template for other product teams.</p>
+      <a class="mob-project-link" href="https://roadmapping-tool-seven.vercel.app/welcome" target="_blank">View project &rarr;</a>
     </div>
-    <div class="mob-card">
-      <div class="mc-icon">&#129517;</div>
-      <div class="mc-name">Roadmapping Tool</div>
-      <div class="mc-desc">A product intake and roadmapping system built to make the full request pipeline visible and traceable.</div>
-      <a class="mc-btn" href="https://roadmapping-tool-seven.vercel.app/welcome" target="_blank">open tool &#8594;</a>
-    </div>
-  </div>
+  </section>
 
   <!-- CAKES -->
-  <div class="mob-section">
-    <h2>&#127874; my cakes</h2>
-    <div class="mob-gallery" id="mob-cake-gallery">
+  <section class="mob-block">
+    <h2>Cake Portfolio</h2>
+    <p style="font-size:14px;color:#666;margin-bottom:16px;">A side practice in pastry and sculptural design.</p>
+    <div class="mob-gallery">
       <img class="mob-gallery-main" id="mob-cake-main" src="Cake%20Photos/bear%20cake.jpg" alt="cake">
-      <div class="mob-gallery-caption" id="mob-cake-caption">bear cake &#127867;</div>
+      <div class="mob-gallery-caption" id="mob-cake-caption">bear cake</div>
       <div class="mob-gallery-thumbs" id="mob-cake-thumbs"></div>
     </div>
-  </div>
-
-  <!-- PUCK -->
-  <div class="mob-section">
-    <h2>&#128008; puck&rsquo;s shrine</h2>
-    <div class="mob-gallery" id="mob-puck-gallery">
-      <img class="mob-gallery-main" id="mob-puck-main" src="Puck%27s%20Photos/puck.jpg" alt="puck">
-      <div class="mob-gallery-caption" id="mob-puck-caption">puck &#128008;</div>
-      <div class="mob-gallery-thumbs" id="mob-puck-thumbs"></div>
-    </div>
-  </div>
+  </section>
 
   <!-- LINKS -->
-  <div class="mob-section">
-    <h2>&#127758; find me</h2>
+  <section class="mob-block">
+    <h2>Connect</h2>
     <div class="mob-links">
-      <a class="mob-link" href="https://www.linkedin.com/in/galaxy-pham/" target="_blank"><img src="linkedin.png" alt="LinkedIn"> LinkedIn</a>
-      <a class="mob-link" href="https://github.com/Galaxypham" target="_blank"><img src="github.png" alt="GitHub"> GitHub</a>
-      <a class="mob-link" href="https://galaxypham.notion.site/Galaxy-Pham-Portfolio-368f0caa384e80778c37ce382ee332d1?pvs=73" target="_blank"><img src="notion.png" alt="Notion"> Notion</a>
+      <a class="mob-link" href="https://www.linkedin.com/in/galaxy-pham/" target="_blank">
+        <img src="linkedin.png" alt=""> <span>LinkedIn</span> <span class="mob-link-arrow">&rarr;</span>
+      </a>
+      <a class="mob-link" href="https://github.com/Galaxypham" target="_blank">
+        <img src="github.png" alt=""> <span>GitHub</span> <span class="mob-link-arrow">&rarr;</span>
+      </a>
+      <a class="mob-link" href="https://galaxypham.notion.site/Galaxy-Pham-Portfolio-368f0caa384e80778c37ce382ee332d1?pvs=73" target="_blank">
+        <img src="notion.png" alt=""> <span>Notion Portfolio</span> <span class="mob-link-arrow">&rarr;</span>
+      </a>
     </div>
-  </div>
+  </section>
 
-  <div class="mob-nav-hint">best experienced on desktop for the full Windows XP experience &#128187;</div>
+  <div class="mob-footer">
+    &copy; Galaxy Pham &middot; Best viewed on desktop
+  </div>
 </div>
 
 <!-- SPLASH SCREEN -->
@@ -1294,10 +1319,6 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: Tahoma, G
     <div>Galaxy</div>
   </div>
   <div class="sm-items">
-    <div class="sm-item" onclick="showWelcomeAgain()">
-      <span class="sm-icon">&#128075;</span>
-      <span>Show welcome popup</span>
-    </div>
     <div class="sm-item" onclick="resetIconLayout()">
       <span class="sm-icon">&#128260;</span>
       <span>Reset desktop layout</span>
@@ -1896,7 +1917,7 @@ function openBrowser(name, url, icon) {
 const ctxMenu = document.getElementById('context-menu');
 
 document.getElementById('desktop').addEventListener('contextmenu', e => {
-  if (e.target.closest('.xp-window') || e.target.closest('#taskbar') || e.target.closest('.desktop-icon[data-folder="recycle"]')) return;
+  if (e.target.closest('.xp-window') || e.target.closest('#taskbar') || e.target.closest('.desktop-icon')) return;
   e.preventDefault();
   ctxMenu.style.display = 'block';
   ctxMenu.style.left = '0px';
@@ -2067,10 +2088,17 @@ document.addEventListener('click', e => {
 });
 
 function resetIconLayout() {
-  localStorage.removeItem('iconPositions');
-  document.querySelectorAll('.desktop-icon').forEach(el => el.remove());
   closeStartMenu();
-  location.reload();
+  localStorage.removeItem('iconPositions');
+  const defaults = computeDefaultIconPositions();
+  document.querySelectorAll('.desktop-icon').forEach((icon, i) => {
+    const key = icon.dataset.key || (icon.dataset.folder || icon.querySelector('.icon-label').textContent.trim()).replace(/\s+/g, '_');
+    const pos = defaults[key] || { x: 16 + Math.floor(i / 8) * 96, y: 16 + (i % 8) * 92 };
+    icon.style.transition = 'left 0.25s ease, top 0.25s ease';
+    icon.style.left = pos.x + 'px';
+    icon.style.top  = pos.y + 'px';
+    setTimeout(() => { icon.style.transition = ''; }, 300);
+  });
 }
 
 function showWelcomeAgain() {
@@ -2149,6 +2177,109 @@ function computeDefaultIconPositions() {
   return pos;
 }
 
+/* ============================
+   ICON CONTEXT MENUS + TRASH GUARD
+   ============================ */
+const iconMessages = {
+  about:       { delete: "you can't delete me, this is my whole personality.",
+                 properties: "100% Galaxy. no preservatives, no filler." },
+  cats:        { delete: "absolutely not. Puck deletes YOU.",
+                 properties: "name: Puck. occupation: menace. status: beloved." },
+  hobbies:     { delete: "the hobbies are load-bearing. do not remove.",
+                 properties: "currently: cooking, thrifting, building, repeating." },
+  photography: { delete: "the camera roll is sacred. it stays.",
+                 properties: "shot on whatever was nearest, mostly an iphone." },
+  music:       { delete: "do NOT take away the playlist.",
+                 properties: "currently spinning: probably something delusional." },
+  bakery:      { delete: "the cakes are non-negotiable.",
+                 properties: "preheat oven to 350. always 350." },
+  racks:       { delete: "built this from scratch. show some respect.",
+                 properties: "Racks v0 \u2014 the MVP that started it all." },
+  roadmap:     { delete: "deleting a roadmapping tool is deeply ironic. denied.",
+                 properties: "every PM's love language: a clean intake pipeline." },
+  LinkedIn:    { delete: "she WANTS recruiters to find her. leave it.",
+                 properties: "currently: open to cool opportunities \u2728" },
+  Notion:      { delete: "her second brain lives here. do not erase.",
+                 properties: "if it's not in Notion, it didn't happen." },
+  GitHub:      { delete: "where the receipts live. can't delete the receipts.",
+                 properties: "commits: more than you'd think." }
+};
+
+/* XP-style modal alert (replaces native alert for nicer vibe) */
+function showXpDialog(title, message, icon) {
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;z-index:95000;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.2);';
+  const ic = icon || '\u26a0\ufe0f';
+  overlay.innerHTML = `<div class="fake-popup" style="position:relative;width:320px;">
+    <div class="fp-titlebar"><span class="fp-icon">${ic}</span><span class="fp-title">${title}</span><span class="fp-close">\u2715</span></div>
+    <div class="fp-body"><span class="fp-warn">${ic}</span><span class="fp-msg">${message}</span></div>
+    <div class="fp-btnbar"><button class="fp-ok">OK</button></div>
+  </div>`;
+  const close = () => overlay.remove();
+  overlay.querySelector('.fp-close').addEventListener('click', close);
+  overlay.querySelector('.fp-ok').addEventListener('click', close);
+  overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+  document.body.appendChild(overlay);
+}
+
+/* Dynamic per-icon context menu (built fresh each time) */
+let iconCtxEl = null;
+function showIconContextMenu(e, key, openFn) {
+  e.preventDefault();
+  e.stopPropagation();
+  hideIconContextMenu();
+  const msgs = iconMessages[key] || {
+    delete: "you can't delete this one either, sorry.",
+    properties: "it's a desktop icon. it sits there. it's iconic."
+  };
+  const menu = document.createElement('div');
+  iconCtxEl = menu;
+  menu.style.cssText = 'position:absolute;background:#fff;border:2px solid #888;box-shadow:2px 2px 4px rgba(0,0,0,0.3);z-index:9500;min-width:170px;padding:2px 0;font-size:12px;';
+  const mkItem = (label, onClick) => {
+    const it = document.createElement('div');
+    it.textContent = label;
+    it.style.cssText = 'padding:4px 24px;cursor:default;';
+    it.onmouseenter = () => { it.style.background = '#0a246a'; it.style.color = '#fff'; };
+    it.onmouseleave = () => { it.style.background = ''; it.style.color = ''; };
+    it.onclick = () => { hideIconContextMenu(); onClick(); };
+    return it;
+  };
+  const divider = () => {
+    const d = document.createElement('div');
+    d.style.cssText = 'border-top:1px solid #ccc;margin:2px 0;';
+    return d;
+  };
+  if (openFn) menu.appendChild(mkItem('open', openFn));
+  menu.appendChild(mkItem('delete', () => showXpDialog("can't delete \u2014 it's load-bearing", msgs.delete, '\uD83D\uDEAB')));
+  menu.appendChild(divider());
+  menu.appendChild(mkItem('properties', () => showXpDialog('properties', msgs.properties, '\u2728')));
+  document.body.appendChild(menu);
+  // position with viewport clamping
+  menu.style.left = '0px'; menu.style.top = '0px';
+  const rect = menu.getBoundingClientRect();
+  const m = 8;
+  let x = e.clientX, y = e.clientY;
+  if (x + rect.width + m > window.innerWidth) x = e.clientX - rect.width;
+  if (y + rect.height + m > window.innerHeight) y = e.clientY - rect.height;
+  menu.style.left = Math.max(m, x) + 'px';
+  menu.style.top  = Math.max(m, y) + 'px';
+}
+function hideIconContextMenu() {
+  if (iconCtxEl) { iconCtxEl.remove(); iconCtxEl = null; }
+}
+document.addEventListener('click', e => {
+  if (iconCtxEl && !e.target.closest('#__noop__')) hideIconContextMenu();
+});
+
+/* Check whether a dragged icon visually overlaps the recycle bin */
+function isOverRecycleBin(icon) {
+  const bin = document.querySelector('.desktop-icon[data-folder="recycle"]');
+  if (!bin || bin === icon) return false;
+  const a = icon.getBoundingClientRect();
+  const b = bin.getBoundingClientRect();
+  return !(a.right < b.left || a.left > b.right || a.bottom < b.top || a.top > b.bottom);
+}
+
 function initDesktopIcons() {
   const ICON_LAYOUT_VERSION = 'v11';
   if (localStorage.getItem('iconLayoutVersion') !== ICON_LAYOUT_VERSION) {
@@ -2164,6 +2295,15 @@ function initDesktopIcons() {
   icons.forEach((icon, i) => {
     const key = (icon.dataset.folder || icon.querySelector('.icon-label').textContent.trim()).replace(/\s+/g, '_');
     icon.dataset.key = key;
+
+    // Right-click menu for every icon EXCEPT the recycle bin (it has its own)
+    if (icon.dataset.folder !== 'recycle') {
+      icon.addEventListener('contextmenu', e => {
+        const dbl = icon.getAttribute('ondblclick');
+        const openFn = dbl ? () => { try { new Function(dbl)(); } catch (_) {} } : null;
+        showIconContextMenu(e, key, openFn);
+      });
+    }
 
     let pos;
     if (saved[key]) {
@@ -2211,6 +2351,19 @@ function initDesktopIcons() {
       icon.classList.remove('dragging');
       icon.style.zIndex = 5;
       if (moved) {
+        // Block drops onto the recycle bin with a friendly XP popup
+        if (icon.dataset.folder !== 'recycle' && isOverRecycleBin(icon)) {
+          icon.style.left = ox + 'px';
+          icon.style.top  = oy + 'px';
+          const msgs = iconMessages[key];
+          const flavor = msgs ? msgs.delete : "this one's staying right where it is.";
+          showXpDialog(
+            "can't move to recycle bin",
+            flavor + "<br><br>psst \u2014 try <strong>right-clicking</strong> any icon for hidden options and secret messages \u2728",
+            '\uD83D\uDEAB'
+          );
+          return;
+        }
         const positions = JSON.parse(localStorage.getItem('iconPositions') || '{}');
         positions[key] = { x: icon.offsetLeft, y: icon.offsetTop };
         localStorage.setItem('iconPositions', JSON.stringify(positions));
@@ -2307,9 +2460,7 @@ function initMobileGallery(photos, mainId, captionId, thumbsId) {
 }
 
 if (window.innerWidth <= 768) {
-  initMobileGallery(aboutPhotos, 'mob-me-main', 'mob-me-caption', 'mob-me-thumbs');
   initMobileGallery(cakePhotos, 'mob-cake-main', 'mob-cake-caption', 'mob-cake-thumbs');
-  initMobileGallery(puckPhotos, 'mob-puck-main', 'mob-puck-caption', 'mob-puck-thumbs');
 }
 </script>
 </body>
