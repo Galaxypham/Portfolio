@@ -379,6 +379,85 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: Tahoma, G
 #start-menu .sm-item:hover { background: linear-gradient(to bottom, #2a6fc5 0%, #2562b5 100%); color: #fff; }
 #start-menu .sm-item .sm-icon { font-size: 20px; flex-shrink: 0; }
 #start-menu .sm-divider { border-top: 1px solid #ddd; margin: 4px 8px; }
+
+#start-menu .sm-section-label {
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 0.8px;
+  color: #0058e6;
+  text-transform: uppercase;
+  padding: 6px 14px 4px;
+  background: #fff;
+}
+#start-menu .sm-check-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 12px;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 12px;
+  color: #000;
+  user-select: none;
+}
+#start-menu .sm-check-item:hover { background: linear-gradient(to bottom, #2a6fc5 0%, #2562b5 100%); color: #fff; }
+#start-menu .sm-check-item:hover .sm-check-label-sub { color: #d8e6f7; }
+#start-menu .sm-check {
+  width: 16px; height: 16px;
+  border: 1px solid #7f9db9;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #0058e6;
+  font-weight: bold;
+  line-height: 1;
+  flex-shrink: 0;
+  box-shadow: inset 1px 1px 0 rgba(0,0,0,0.08);
+}
+#start-menu .sm-check-item.done .sm-check { background: #eaf3ff; }
+#start-menu .sm-check-label {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+#start-menu .sm-check-label-main { font-weight: 500; }
+#start-menu .sm-check-item.done .sm-check-label-main {
+  text-decoration: line-through;
+  color: #777;
+}
+#start-menu .sm-check-item.done:hover .sm-check-label-main {
+  color: #d8e6f7;
+}
+#start-menu .sm-check-label-sub {
+  font-size: 10px;
+  color: #888;
+  margin-top: 2px;
+  letter-spacing: 0.2px;
+}
+#start-menu .sm-progress {
+  font-size: 10px;
+  color: #666;
+  padding: 4px 14px 8px;
+  background: #fff;
+  letter-spacing: 0.3px;
+}
+#start-menu .sm-progress.done { color: #0a8a3a; font-weight: bold; }
+#start-menu .sm-progress-bar {
+  height: 6px;
+  background: #e4ecf5;
+  border: 1px solid #b8c8d8;
+  margin-top: 4px;
+  overflow: hidden;
+}
+#start-menu .sm-progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(to bottom, #5ac24e 0%, #3a9c2f 100%);
+  width: 0%;
+  transition: width 0.25s ease;
+}
 #start-menu .sm-footer {
   background: linear-gradient(to bottom, #4a8eda 0%, #3478c5 100%);
   padding: 6px 12px;
@@ -1983,15 +2062,25 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: Tahoma, G
     <div class="wizard-body">
       <div class="wizard-thumb"></div>
       <div class="wizard-text">
-        <div class="wt-heading">OH! So you clicked into my portfolio! <span class="shimmer">WELCOME!</span></div>
-        <div class="wt-body">
-          You've just entered <strong>Galaxy's</strong> desktop. I'm a product builder, so <strong>my work</strong> will auto-open in a sec with my case studies. Here's how the rest of this works:
+        <div class="wt-heading" id="splash-heading">Welcome to my portfolio! <span class="shimmer">I'm so glad you're here.</span></div>
+        <div class="wt-body" id="splash-step-1">
+          I'm <strong>Galaxy</strong>, a product builder. I built this Windows XP themed desktop as something interactive to showcase both my creative side and my professional product portfolio.
+          <br><br>
+          I'm in the process of building more templates of past work that your team can fork if you find the tool useful for your org. To kick things off, I'd love for you to check out two of my products:
           <ul>
-            <li>Top-left icons (glowing pink) are my product work</li>
+            <li><strong>Roadmapping Tool</strong>: product intake and roadmap system, originally built at Meta</li>
+            <li><strong>Racks</strong>: mobile-first AI inventory app for vintage resellers</li>
+          </ul>
+          Click <strong>next</strong> for a quick rundown on how to navigate the desktop.
+        </div>
+        <div class="wt-body" id="splash-step-2" style="display:none;">
+          Here's how this works:
+          <ul>
             <li>Double-click any folder to open it</li>
             <li>Drag windows around to make it your own</li>
             <li>Right-click the desktop for secret options</li>
             <li>Close any window with the X button</li>
+            <li><strong>Tip:</strong> hit <strong>ESC</strong> to close the top open window quickly</li>
           </ul>
           Have fun snooping around. Stay as long as you want.
         </div>
@@ -2001,9 +2090,9 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: Tahoma, G
       <div class="xp-progress"><div class="xp-progress-bar" id="splash-progress"></div></div>
     </div>
     <div class="wizard-buttons">
-      <button class="xp-btn" onclick="dismissSplash()">cancel</button>
-      <button class="xp-btn" disabled>back</button>
-      <button class="xp-btn" onclick="dismissSplash()">next &gt;</button>
+      <button class="xp-btn" onclick="dismissSplash()">go to site</button>
+      <button class="xp-btn" id="splash-back-btn" onclick="splashBack()" disabled>&lt; back</button>
+      <button class="xp-btn" id="splash-next-btn" onclick="splashNext()">next &gt;</button>
     </div>
   </div>
 </div>
@@ -2083,17 +2172,31 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: Tahoma, G
     <div>Galaxy</div>
   </div>
   <div class="sm-items">
-    <div class="sm-item" onclick="openMyWork();closeStartMenu()">
-      <span class="sm-icon">&#128188;</span>
-      <span>My Work</span>
+    <div class="sm-section-label">Take the tour</div>
+    <div class="sm-check-item" id="todo-mywork" onclick="handleTodoClick(event,'mywork')">
+      <div class="sm-check" onclick="event.stopPropagation();toggleTodo('mywork')"></div>
+      <div class="sm-check-label">
+        <span class="sm-check-label-main">&#128188; Browse My Work</span>
+        <span class="sm-check-label-sub">overview of products I've shipped</span>
+      </div>
     </div>
-    <div class="sm-item" onclick="openRoadmap();closeStartMenu()">
-      <span class="sm-icon">&#129517;</span>
-      <span>Roadmapping Tool (case study)</span>
+    <div class="sm-check-item" id="todo-roadmap" onclick="handleTodoClick(event,'roadmap')">
+      <div class="sm-check" onclick="event.stopPropagation();toggleTodo('roadmap')"></div>
+      <div class="sm-check-label">
+        <span class="sm-check-label-main">&#129517; Read Roadmapping Tool case study</span>
+        <span class="sm-check-label-sub">built at Meta, rebuilt as a template</span>
+      </div>
     </div>
-    <div class="sm-item" onclick="openRacks();closeStartMenu()">
-      <span class="sm-icon">&#128087;</span>
-      <span>Racks (case study)</span>
+    <div class="sm-check-item" id="todo-racks" onclick="handleTodoClick(event,'racks')">
+      <div class="sm-check" onclick="event.stopPropagation();toggleTodo('racks')"></div>
+      <div class="sm-check-label">
+        <span class="sm-check-label-main">&#128087; Read Racks case study</span>
+        <span class="sm-check-label-sub">AI inventory app, 0-to-1 founder build</span>
+      </div>
+    </div>
+    <div class="sm-progress" id="todo-progress">
+      <span id="todo-progress-text">0 of 3 explored</span>
+      <div class="sm-progress-bar"><div class="sm-progress-bar-fill" id="todo-progress-fill"></div></div>
     </div>
     <div class="sm-divider"></div>
     <div class="sm-item" onclick="resetIconLayout()">
@@ -2187,17 +2290,27 @@ function renderIcon(icon, size) {
   return icon;
 }
 
-function getNextOffset() {
+function getNextOffset(w, h) {
   offsetCounter++;
-  const base = 60 + (offsetCounter % 8) * 30;
-  return { x: base + Math.random() * 30, y: base + Math.random() * 20 };
+  const vw = window.innerWidth;
+  const vh = window.innerHeight - 36; // taskbar
+  const centerX = Math.max(20, (vw - w) / 2);
+  const centerY = Math.max(20, (vh - h) / 2);
+  // Cascade subsequent windows slightly down-right from center
+  const cascade = (offsetCounter % 6) * 28;
+  let x = centerX + cascade - 70;
+  let y = centerY + cascade - 70;
+  // Clamp so windows always stay fully on-screen
+  x = Math.max(10, Math.min(x, vw - w - 10));
+  y = Math.max(10, Math.min(y, vh - h - 10));
+  return { x, y };
 }
 
 function createWindow(title, icon, contentHTML, opts = {}) {
   const id = 'win-' + (++windowIdCounter);
-  const off = getNextOffset();
   const w = opts.width || 520;
   const h = opts.height || 400;
+  const off = getNextOffset(w, h);
 
   const win = document.createElement('div');
   win.className = 'xp-window';
@@ -2520,6 +2633,7 @@ function openFile(folderKey, fileName) {
    PRODUCT SHOWCASE
    ============================ */
 function openMyWork() {
+  if (typeof markTodoDone === 'function') markTodoDone('mywork');
   const html = `<div class="mywork-window">
     <div class="mywork-intro">
       Hi, I\u2019m <strong>Galaxy</strong>. I build operational products that make messy processes visible and traceable. Here\u2019s what I\u2019ve shipped.
@@ -2549,6 +2663,7 @@ function openMyWork() {
 }
 
 function openRacks() {
+  if (typeof markTodoDone === 'function') markTodoDone('racks');
   const url = 'https://galaxypham.github.io/racks/';
   const repo = 'https://github.com/Galaxypham/racks';
   const html = `<div class="product-window">
@@ -2620,6 +2735,7 @@ function openRacks() {
 }
 
 function openRoadmap() {
+  if (typeof markTodoDone === 'function') markTodoDone('roadmap');
   const url = 'https://roadmapping-tool-seven.vercel.app/welcome';
   const launchKit = 'https://galaxypham.notion.site/Roadmapping-Tool-Launch-Kits-366f0caa384e80ac95c3ebd8d05f9891?pvs=143';
   const html = `<div class="product-window">
@@ -3152,6 +3268,42 @@ function spawnFakePopup(data, index) {
   splash.appendChild(el);
 }
 
+let splashStep = 1;
+const SPLASH_TOTAL_STEPS = 2;
+
+const SPLASH_HEADINGS = {
+  1: `Welcome to my portfolio! <span class="shimmer">I'm so glad you're here.</span>`,
+  2: `A quick guide <span class="shimmer">to snooping around.</span>`
+};
+
+function setSplashStep(n) {
+  splashStep = Math.max(1, Math.min(SPLASH_TOTAL_STEPS, n));
+  for (let i = 1; i <= SPLASH_TOTAL_STEPS; i++) {
+    const panel = document.getElementById('splash-step-' + i);
+    if (panel) panel.style.display = (i === splashStep) ? '' : 'none';
+  }
+  const heading = document.getElementById('splash-heading');
+  if (heading && SPLASH_HEADINGS[splashStep]) heading.innerHTML = SPLASH_HEADINGS[splashStep];
+  const backBtn = document.getElementById('splash-back-btn');
+  const nextBtn = document.getElementById('splash-next-btn');
+  if (backBtn) backBtn.disabled = (splashStep === 1);
+  if (nextBtn) nextBtn.textContent = (splashStep === SPLASH_TOTAL_STEPS) ? 'finish' : 'next >';
+  const bar = document.getElementById('splash-progress');
+  if (bar) bar.style.width = (splashStep === SPLASH_TOTAL_STEPS) ? '100%' : '50%';
+}
+
+function splashNext() {
+  if (splashStep < SPLASH_TOTAL_STEPS) {
+    setSplashStep(splashStep + 1);
+  } else {
+    dismissSplash();
+  }
+}
+
+function splashBack() {
+  if (splashStep > 1) setSplashStep(splashStep - 1);
+}
+
 function dismissSplash() {
   const splash = document.getElementById('splash-screen');
   if (splash.dataset.dismissed === '1') return;
@@ -3188,6 +3340,104 @@ function closeStartMenu() {
   document.getElementById('start-button').classList.remove('open');
 }
 
+/* ============================
+   TOUR TODO CHECKLIST
+   ============================ */
+const TODO_KEYS = ['mywork', 'roadmap', 'racks'];
+const TODO_OPENERS = {
+  mywork: () => openMyWork(),
+  roadmap: () => openRoadmap(),
+  racks: () => openRacks()
+};
+const TODO_STORAGE_KEY = 'galaxyTourTodo';
+let todoState = { mywork: false, roadmap: false, racks: false };
+let todoCelebrated = false;
+
+function loadTodoState() {
+  try {
+    const raw = localStorage.getItem(TODO_STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      TODO_KEYS.forEach(k => { todoState[k] = !!parsed[k]; });
+    }
+  } catch (e) {}
+  todoCelebrated = TODO_KEYS.every(k => todoState[k]);
+}
+
+function saveTodoState() {
+  try { localStorage.setItem(TODO_STORAGE_KEY, JSON.stringify(todoState)); } catch (e) {}
+}
+
+function renderTodoState() {
+  TODO_KEYS.forEach(k => {
+    const item = document.getElementById('todo-' + k);
+    if (!item) return;
+    const check = item.querySelector('.sm-check');
+    if (todoState[k]) {
+      item.classList.add('done');
+      if (check) check.textContent = '\u2714';
+    } else {
+      item.classList.remove('done');
+      if (check) check.textContent = '';
+    }
+  });
+  const done = TODO_KEYS.filter(k => todoState[k]).length;
+  const text = document.getElementById('todo-progress-text');
+  const fill = document.getElementById('todo-progress-fill');
+  const wrap = document.getElementById('todo-progress');
+  if (text) text.textContent = (done === TODO_KEYS.length)
+    ? 'tour complete! thanks for snooping :)'
+    : `${done} of ${TODO_KEYS.length} explored`;
+  if (fill) fill.style.width = (done / TODO_KEYS.length * 100) + '%';
+  if (wrap) wrap.classList.toggle('done', done === TODO_KEYS.length);
+}
+
+function toggleTodo(key) {
+  todoState[key] = !todoState[key];
+  saveTodoState();
+  renderTodoState();
+  maybeCelebrateTodo();
+}
+
+function markTodoDone(key) {
+  if (!todoState[key]) {
+    todoState[key] = true;
+    saveTodoState();
+    renderTodoState();
+    maybeCelebrateTodo();
+  }
+}
+
+function handleTodoClick(event, key) {
+  if (event && event.target && event.target.closest('.sm-check')) return;
+  markTodoDone(key);
+  closeStartMenu();
+  const opener = TODO_OPENERS[key];
+  if (opener) opener();
+}
+
+function maybeCelebrateTodo() {
+  const allDone = TODO_KEYS.every(k => todoState[k]);
+  if (allDone && !todoCelebrated) {
+    todoCelebrated = true;
+    setTimeout(() => {
+      if (typeof showXpDialog === 'function') {
+        showXpDialog(
+          'tour complete!',
+          'You made it through all three! Thanks for taking the tour of my work. If you want to chat, my LinkedIn and GitHub are on the desktop.',
+          '\uD83C\uDF89'
+        );
+      } else {
+        alert('Tour complete! Thanks for snooping :)');
+      }
+    }, 350);
+  }
+}
+
+loadTodoState();
+document.addEventListener('DOMContentLoaded', renderTodoState);
+renderTodoState();
+
 document.addEventListener('click', e => {
   if (!e.target.closest('#start-menu') && !e.target.closest('#start-button')) {
     closeStartMenu();
@@ -3211,6 +3461,7 @@ function resetIconLayout() {
 function showWelcomeAgain() {
   closeStartMenu();
   const splash = document.getElementById('splash-screen');
+  splash.dataset.dismissed = '';
   splash.querySelectorAll('.fake-popup').forEach(p => p.remove());
   splash.style.display = 'flex';
   splash.style.opacity = '0';
@@ -3227,7 +3478,7 @@ function showWelcomeAgain() {
 
   setTimeout(() => {
     wizard.style.display = 'flex';
-    setTimeout(() => { bar.style.width = '100%'; }, 100);
+    setTimeout(() => { setSplashStep(1); }, 100);
   }, 2800);
 }
 
@@ -3237,9 +3488,7 @@ fakePopups.forEach((popup, i) => {
 
 setTimeout(() => {
   document.getElementById('splash-wizard').style.display = 'flex';
-  setTimeout(() => {
-    document.getElementById('splash-progress').style.width = '100%';
-  }, 100);
+  setTimeout(() => { setSplashStep(1); }, 100);
 }, 2800);
 
 /* ============================
@@ -3254,7 +3503,7 @@ function computeDefaultIconPositions() {
   const perCol = Math.max(1, Math.floor(availH / STEP));
   const rightX = Math.max(window.innerWidth - 96, 200);
 
-  const leftOrder = ['about', 'cats', 'games', 'music', 'bakery', 'racks', 'roadmap'];
+  const leftOrder = ['mywork', 'roadmap', 'racks', 'about', 'bakery', 'music', 'games', 'cats'];
   const rightOrder = ['LinkedIn', 'Notion', 'GitHub'];
   const pos = {};
 
