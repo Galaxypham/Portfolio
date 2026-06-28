@@ -24,1953 +24,7 @@
 <link rel="icon" type="image/jpeg" href="me-mobile.jpg">
 
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
-<style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-:root {
-  --xp-blue-start: #0a246a;
-  --xp-blue-end: #3a6ea5;
-  --xp-titlebar-start: #0058e6;
-  --xp-titlebar-mid: #3a8cff;
-  --xp-titlebar-end: #0058e6;
-  --xp-titlebar-inactive: #7a96df;
-  --xp-button-face: #ece9d8;
-  --xp-button-highlight: #ffffff;
-  --xp-button-shadow: #aca899;
-  --xp-taskbar-start: #1f5fc4;
-  --xp-taskbar-end: #3478e3;
-  --xp-start-green-start: #3c8d2f;
-  --xp-start-green-end: #55b344;
-  --content-bg: #fff0f8;
-  --content-heading: #cc0077;
-  --content-text: #260020;
-  --content-border: #cc0077;
-}
-
-html, body { width: 100%; height: 100%; overflow: hidden; font-family: Tahoma, Geneva, Verdana, sans-serif; }
-
-/* ===== MOBILE PAGE (professional one-pager) ===== */
-#mobile-overlay {
-  display: none;
-  position: fixed; inset: 0;
-  background: #faf8f5;
-  color: #1a1a1f;
-  z-index: 99999;
-  overflow-y: auto;
-  flex-direction: column;
-  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
-@media (max-width: 768px) {
-  #mobile-overlay { display: flex; }
-}
-
-.mob-notice {
-  background: #1a1a1f;
-  color: #fafafa;
-  padding: 14px 20px;
-  font-size: 13px;
-  line-height: 1.5;
-  border-bottom: 3px solid #cc0077;
-  flex-shrink: 0;
-}
-.mob-notice strong { color: #ffb3d9; display: block; margin-bottom: 4px; font-size: 12px; letter-spacing: 0.5px; text-transform: uppercase; }
-
-.mob-hero {
-  padding: 36px 24px 28px;
-  text-align: center;
-  background: #fff;
-  border-bottom: 1px solid #ececec;
-}
-.mob-hero-photo {
-  width: 140px; height: 140px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin: 0 auto 18px;
-  display: block;
-  border: 3px solid #fff;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  background: #e8e8e8;
-}
-.mob-hero-name {
-  font-size: 26px;
-  font-weight: 700;
-  color: #1a1a1f;
-  letter-spacing: -0.5px;
-  margin-bottom: 6px;
-}
-.mob-hero-role {
-  font-size: 14px;
-  color: #666;
-  line-height: 1.5;
-}
-
-.mob-block {
-  padding: 32px 24px;
-  border-bottom: 1px solid #ececec;
-}
-.mob-block h2 {
-  font-size: 11px;
-  font-weight: 700;
-  color: #cc0077;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  margin-bottom: 16px;
-}
-.mob-block p {
-  font-size: 15px;
-  color: #2a2a30;
-  line-height: 1.65;
-  margin-bottom: 12px;
-}
-.mob-block em { color: #cc0077; font-style: normal; font-weight: 600; }
-
-.mob-project {
-  padding: 18px 0;
-  border-bottom: 1px solid #f0f0f0;
-}
-.mob-project:last-child { border-bottom: none; }
-.mob-project h3 {
-  font-size: 18px;
-  font-weight: 600;
-  color: #1a1a1f;
-  margin-bottom: 6px;
-}
-.mob-project .mob-project-sub {
-  font-size: 12px;
-  color: #888;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-.mob-project p {
-  font-size: 14px;
-  color: #4a4a50;
-  line-height: 1.6;
-  margin-bottom: 12px;
-}
-.mob-project-link {
-  display: inline-block;
-  font-size: 13px;
-  font-weight: 600;
-  color: #cc0077;
-  text-decoration: none;
-  padding: 8px 16px;
-  border: 1.5px solid #cc0077;
-  border-radius: 4px;
-  transition: all 0.15s;
-}
-.mob-project-link:active { background: #cc0077; color: #fff; }
-
-.mob-gallery { display: flex; flex-direction: column; }
-.mob-gallery-main {
-  width: 100%;
-  aspect-ratio: 4/3;
-  object-fit: contain;
-  border-radius: 6px;
-  background: #f2f0ec;
-  display: block;
-}
-.mob-gallery-caption {
-  font-size: 13px;
-  color: #666;
-  padding: 10px 0 6px;
-  text-align: center;
-  font-style: italic;
-}
-.mob-gallery-thumbs {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  padding: 8px 0 4px;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-.mob-gallery-thumbs::-webkit-scrollbar { display: none; }
-.mob-gallery-thumbs img {
-  width: 72px; height: 72px;
-  object-fit: cover;
-  border-radius: 6px;
-  border: 2px solid #e4e4e4;
-  cursor: pointer;
-  flex-shrink: 0;
-  opacity: 0.7;
-  transition: all 0.15s;
-}
-.mob-gallery-thumbs img.active { border-color: #cc0077; opacity: 1; box-shadow: 0 2px 8px rgba(204,0,119,0.25); }
-.mob-gallery-hint {
-  font-size: 11px;
-  color: #999;
-  text-align: center;
-  margin-top: 4px;
-  letter-spacing: 0.3px;
-}
-
-.mob-links {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.mob-link {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 14px 18px;
-  background: #fff;
-  border: 1px solid #e4e4e4;
-  border-radius: 8px;
-  color: #1a1a1f;
-  font-size: 15px;
-  font-weight: 500;
-  text-decoration: none;
-}
-.mob-link img { width: 22px; height: 22px; object-fit: contain; }
-.mob-link .mob-link-arrow { margin-left: auto; color: #aaa; font-size: 18px; }
-.mob-link:active { background: #f5f5f5; }
-
-.mob-footer {
-  text-align: center;
-  padding: 28px 24px 40px;
-  font-size: 12px;
-  color: #999;
-  line-height: 1.6;
-}
-
-/* ===== DESKTOP ===== */
-#desktop {
-  width: 100vw; height: 100vh;
-  background-image: url('me.png');
-  background-size: cover;
-  background-position: center top;
-  position: relative;
-  overflow: hidden;
-}
-#desktop-overlay {
-  position: absolute; inset: 0;
-  background: rgba(0,0,0,0.15);
-  pointer-events: none;
-  z-index: 0;
-}
-#desktop-icons {
-  position: absolute;
-  inset: 0;
-  z-index: 5;
-  pointer-events: none;
-}
-.desktop-icon {
-  position: absolute;
-  width: 80px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 6px 4px;
-  border-radius: 3px;
-  cursor: grab;
-  user-select: none;
-  pointer-events: auto;
-}
-.desktop-icon.dragging { cursor: grabbing; opacity: 0.7; }
-.desktop-icon:hover { background: rgba(50,100,200,0.35); }
-.desktop-icon .icon-img { font-size: 36px; margin-bottom: 4px; filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.5)); }
-.desktop-icon .icon-img img { width: 36px; height: 36px; object-fit: contain; }
-.desktop-icon .icon-label {
-  font-size: 11px; color: #fff;
-  text-shadow: 1px 1px 2px #000, 0 0 4px #000;
-  line-height: 1.3;
-  word-wrap: break-word;
-}
-
-/* ===== FACE CUTOUT ===== */
-#face-cutout {
-  position: fixed;
-  bottom: 30px; right: 20px;
-  width: 260px;
-  pointer-events: none;
-  z-index: 50;
-  image-rendering: auto;
-}
-
-/* ===== TASKBAR ===== */
-#taskbar {
-  position: fixed; bottom: 0; left: 0; right: 0;
-  height: 36px;
-  background: linear-gradient(to bottom, #1f5fc4 0%, #2e71d0 4%, #3478e3 6%, #3c7fe8 8%, #2663c5 90%, #1d56b2 100%);
-  border-top: 1px solid #0c3c8c;
-  z-index: 60;
-  display: flex;
-  align-items: center;
-  padding: 0 2px;
-}
-#start-button {
-  height: 30px;
-  background: linear-gradient(to bottom, #3cad3a 0%, #3cad3a 3%, #46b344 50%, #329e2e 51%, #2d8e28 100%);
-  border: 1px outset #5ec85a;
-  border-radius: 0 8px 8px 0;
-  color: #fff;
-  font-family: 'Tahoma', sans-serif;
-  font-size: 12px;
-  font-weight: bold;
-  padding: 0 12px 0 6px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  text-shadow: 0 1px 1px rgba(0,0,0,0.4);
-  letter-spacing: 0.5px;
-}
-#start-button:active, #start-button.open { filter: brightness(0.9); }
-#start-button .start-logo { font-size: 16px; }
-
-/* ===== START MENU ===== */
-#start-menu {
-  position: fixed;
-  bottom: 36px;
-  left: 0;
-  width: 280px;
-  background: #fff;
-  border: 2px solid #0055ea;
-  border-radius: 8px 8px 0 0;
-  box-shadow: 4px -4px 16px rgba(0,0,0,0.4);
-  z-index: 70;
-  display: none;
-  flex-direction: column;
-  overflow: hidden;
-  animation: startMenuIn 0.2s ease-out;
-}
-#start-menu.open { display: flex; }
-@keyframes startMenuIn {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-#start-menu .sm-header {
-  background: linear-gradient(to bottom, #0058e6 0%, #3a8cff 50%, #0052d6 100%);
-  color: #fff;
-  padding: 10px 14px;
-  font-size: 14px;
-  font-weight: bold;
-  text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-#start-menu .sm-avatar {
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  background: url('me-thumb.png') center/cover #ccc;
-  border: 2px solid #fff;
-  flex-shrink: 0;
-}
-#start-menu .sm-items {
-  padding: 8px 4px;
-  background: #fff;
-}
-#start-menu .sm-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 8px 12px;
-  cursor: pointer;
-  border-radius: 3px;
-  font-size: 12px;
-  color: #000;
-  user-select: none;
-}
-#start-menu .sm-item:hover { background: linear-gradient(to bottom, #2a6fc5 0%, #2562b5 100%); color: #fff; }
-#start-menu .sm-item .sm-icon { font-size: 20px; flex-shrink: 0; }
-#start-menu .sm-divider { border-top: 1px solid #ddd; margin: 4px 8px; }
-
-#start-menu .sm-section-label {
-  font-size: 10px;
-  font-weight: bold;
-  letter-spacing: 0.8px;
-  color: #0058e6;
-  text-transform: uppercase;
-  padding: 6px 14px 4px;
-  background: #fff;
-}
-#start-menu .sm-check-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 7px 12px;
-  cursor: pointer;
-  border-radius: 3px;
-  font-size: 12px;
-  color: #000;
-  user-select: none;
-}
-#start-menu .sm-check-item:hover { background: linear-gradient(to bottom, #2a6fc5 0%, #2562b5 100%); color: #fff; }
-#start-menu .sm-check-item:hover .sm-check-label-sub { color: #d8e6f7; }
-#start-menu .sm-check {
-  width: 16px; height: 16px;
-  border: 1px solid #7f9db9;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  color: #0058e6;
-  font-weight: bold;
-  line-height: 1;
-  flex-shrink: 0;
-  box-shadow: inset 1px 1px 0 rgba(0,0,0,0.08);
-}
-#start-menu .sm-check-item.done .sm-check { background: #eaf3ff; }
-#start-menu .sm-check-label {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-width: 0;
-}
-#start-menu .sm-check-label-main { font-weight: 500; }
-#start-menu .sm-check-item.done .sm-check-label-main {
-  text-decoration: line-through;
-  color: #777;
-}
-#start-menu .sm-check-item.done:hover .sm-check-label-main {
-  color: #d8e6f7;
-}
-#start-menu .sm-check-label-sub {
-  font-size: 10px;
-  color: #888;
-  margin-top: 2px;
-  letter-spacing: 0.2px;
-}
-#start-menu .sm-progress {
-  font-size: 10px;
-  color: #666;
-  padding: 4px 14px 8px;
-  background: #fff;
-  letter-spacing: 0.3px;
-}
-#start-menu .sm-progress.done { color: #0a8a3a; font-weight: bold; }
-#start-menu .sm-progress-bar {
-  height: 6px;
-  background: #e4ecf5;
-  border: 1px solid #b8c8d8;
-  margin-top: 4px;
-  overflow: hidden;
-}
-#start-menu .sm-progress-bar-fill {
-  height: 100%;
-  background: linear-gradient(to bottom, #5ac24e 0%, #3a9c2f 100%);
-  width: 0%;
-  transition: width 0.25s ease;
-}
-#start-menu .sm-footer {
-  background: linear-gradient(to bottom, #4a8eda 0%, #3478c5 100%);
-  padding: 6px 12px;
-  display: flex;
-  justify-content: flex-end;
-}
-#start-menu .sm-footer-btn {
-  background: transparent;
-  border: 1px solid transparent;
-  color: #fff;
-  font-size: 11px;
-  cursor: pointer;
-  padding: 4px 8px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
-}
-#start-menu .sm-footer-btn:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3); }
-
-#taskbar-windows {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  margin: 0 6px;
-  overflow: hidden;
-}
-.taskbar-btn {
-  height: 26px;
-  min-width: 100px;
-  max-width: 180px;
-  background: linear-gradient(to bottom, #3a84da 0%, #2a6ec7 50%, #2562b5 100%);
-  border: 1px solid #1a4c99;
-  color: #fff;
-  font-family: Tahoma, sans-serif;
-  font-size: 11px;
-  padding: 0 8px;
-  cursor: pointer;
-  text-align: left;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-.taskbar-btn:hover { background: linear-gradient(to bottom, #4a94ea 0%, #3a7ed7 50%, #3572c5 100%); }
-.taskbar-btn.active {
-  background: linear-gradient(to bottom, #1c54a5 0%, #1a4c99 50%, #163f80 100%);
-  border-style: inset;
-}
-.taskbar-btn.minimized { opacity: 0.6; }
-.taskbar-btn .tb-icon { font-size: 12px; }
-
-#taskbar-clock {
-  background: rgba(0,0,0,0.15);
-  border: 1px inset rgba(255,255,255,0.15);
-  color: #fff;
-  font-family: Tahoma, sans-serif;
-  font-size: 11px;
-  padding: 3px 10px;
-  text-shadow: 0 1px 1px rgba(0,0,0,0.3);
-  white-space: nowrap;
-}
-
-/* ===== WINDOWS ===== */
-.xp-window {
-  position: absolute;
-  min-width: 320px;
-  background: var(--xp-button-face);
-  border: 2px solid #0055ea;
-  border-radius: 8px 8px 0 0;
-  box-shadow: 2px 2px 10px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.15);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-.xp-window.maximized {
-  top: 0 !important; left: 0 !important;
-  width: 100vw !important;
-  height: calc(100vh - 36px) !important;
-  border-radius: 0;
-}
-
-.xp-titlebar {
-  background: linear-gradient(to bottom, #0058e6 0%, #3a8cff 10%, #4d97ff 18%, #2a7fff 50%, #0f6af5 84%, #0052d6 100%);
-  height: 28px;
-  display: flex;
-  align-items: center;
-  padding: 0 4px;
-  cursor: move;
-  user-select: none;
-  flex-shrink: 0;
-  border-radius: 6px 6px 0 0;
-}
-.xp-window.maximized .xp-titlebar { border-radius: 0; }
-.xp-titlebar.inactive {
-  background: linear-gradient(to bottom, #7a96df 0%, #a0b8ef 10%, #b0c4f0 18%, #98b0e8 50%, #7090d8 84%, #6080c8 100%);
-}
-.xp-titlebar .tb-window-icon { font-size: 14px; margin-right: 4px; }
-.xp-titlebar .title-text {
-  flex: 1;
-  color: #fff;
-  font-size: 12px;
-  font-weight: bold;
-  text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.titlebar-buttons {
-  display: flex;
-  gap: 2px;
-}
-.titlebar-btn {
-  width: 22px; height: 22px;
-  background: linear-gradient(to bottom, #fff 0%, #dfd8cb 45%, #c8c0b0 50%, #e8e0d4 100%);
-  border: 1px solid #999;
-  border-radius: 3px;
-  font-size: 10px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #000;
-  font-weight: bold;
-  font-family: 'Marlett', Tahoma, sans-serif;
-}
-.titlebar-btn:hover { background: linear-gradient(to bottom, #fff 0%, #e8e0d8 45%, #d8d0c0 50%, #f0e8dc 100%); }
-.titlebar-btn:active { background: #c0b8a8; }
-.titlebar-btn.close-btn { background: linear-gradient(to bottom, #e88 0%, #d66 45%, #c44 50%, #e88 100%); color: #fff; }
-.titlebar-btn.close-btn:hover { background: linear-gradient(to bottom, #f99 0%, #e77 45%, #d55 50%, #f99 100%); }
-
-.xp-window-body {
-  flex: 1;
-  overflow: auto;
-  background: #fff;
-  border: 2px inset #b8b4a8;
-  margin: 0 3px 3px;
-}
-
-/* Folder view */
-.folder-view {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  padding: 12px;
-  background: #fff;
-}
-.folder-item {
-  width: 90px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 6px 4px;
-  cursor: default;
-  border-radius: 3px;
-}
-.folder-item:hover { background: #e0e8f8; }
-.folder-item .file-icon { font-size: 32px; margin-bottom: 4px; }
-.folder-item .file-label { font-size: 11px; color: #000; line-height: 1.2; word-wrap: break-word; }
-
-/* File content view */
-.file-content {
-  background: var(--content-bg);
-  padding: 24px 26px;
-  min-height: 100%;
-}
-.file-content h2 {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 13px;
-  color: var(--content-heading);
-  margin-bottom: 18px;
-  line-height: 1.6;
-}
-.file-content p, .file-content ul {
-  font-family: 'VT323', monospace;
-  font-size: 22px;
-  color: var(--content-text);
-  line-height: 1.5;
-  margin-bottom: 12px;
-}
-.file-content ul { padding-left: 26px; }
-.file-content li { margin-bottom: 6px; }
-.file-content .placeholder-note {
-  font-family: 'VT323', monospace;
-  font-size: 19px;
-  color: #888;
-  font-style: italic;
-}
-
-/* Image grid */
-.image-grid {
-  display: grid;
-  gap: 12px;
-  padding: 16px;
-  background: var(--content-bg);
-}
-.image-grid.grid-2x2 { grid-template-columns: 1fr 1fr; }
-.image-grid.grid-2x3 { grid-template-columns: 1fr 1fr; }
-
-/* About Me combined page */
-.about-page { background: var(--content-bg); padding: 32px 32px 40px; font-family: 'VT323', monospace; }
-.about-page .about-header { text-align: center; margin-bottom: 32px; border-bottom: 2px solid var(--content-border); padding-bottom: 24px; }
-.about-page .about-header .about-name { font-family: 'Press Start 2P', cursive; font-size: 16px; color: var(--content-heading); line-height: 2; }
-.about-page .about-header .about-tagline { font-size: 24px; color: var(--content-text); margin-top: 10px; line-height: 1.4; }
-.about-page .about-section { margin-bottom: 32px; }
-.about-page .about-section h3 { font-family: 'Press Start 2P', cursive; font-size: 13px; color: var(--content-heading); margin-bottom: 16px; line-height: 1.8; }
-.about-page .about-section p { font-size: 22px; color: var(--content-text); line-height: 1.5; margin-bottom: 10px; }
-.about-page .about-section em { color: #8a0066; font-style: normal; font-weight: bold; }
-.about-page .facts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.about-page .fact-card { background: #fff; border: 2px solid var(--content-border); padding: 14px 16px; font-size: 21px; color: var(--content-text); line-height: 1.4; }
-.about-page .fact-card .fact-num { font-family: 'Press Start 2P', cursive; font-size: 11px; color: var(--content-heading); display: block; margin-bottom: 8px; }
-.about-page .about-divider { border: none; border-top: 2px dashed var(--content-border); margin: 28px 0; }
-.about-page .about-gallery { height: 500px; border: 2px solid var(--content-border); }
-.about-page .about-gallery .cake-main { min-height: 0; }
-
-/* Product showcase window */
-.xp-window-body:has(> .product-window) { padding: 0; background: #1a0028; overflow: auto; }
-.product-window {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-  background: #1a0028;
-}
-.product-header { background: #1a0028; padding: 22px 24px 18px; flex-shrink: 0; }
-.product-header .prod-icon { font-size: 36px; margin-bottom: 10px; }
-.product-header .prod-name { font-family: 'Press Start 2P', cursive; font-size: 14px; color: #ffb3ff; margin-bottom: 12px; line-height: 1.8; }
-.product-header .prod-tagline { font-family: 'VT323', monospace; font-size: 22px; color: #e0b3ff; margin-bottom: 16px; line-height: 1.4; }
-.product-header .prod-desc { font-family: 'VT323', monospace; font-size: 21px; color: #e8d8e8; line-height: 1.55; margin-bottom: 16px; }
-.product-header .prod-note { font-family: 'VT323', monospace; font-size: 19px; color: #a89aa8; font-style: italic; line-height: 1.45; border-top: 1px dashed #444; padding-top: 12px; margin-top: 6px; }
-.product-header .prod-btn { display: inline-block; margin-top: 16px; padding: 8px 20px; background: none; border: 2px solid var(--content-border); color: #ffb3ff; font-family: 'VT323', monospace; font-size: 22px; letter-spacing: 0.5px; cursor: pointer; transition: all 0.15s; }
-.product-header .prod-btn:hover { background: rgba(204,0,119,0.18); box-shadow: 0 0 12px rgba(204,0,119,0.4); }
-.product-header .prod-btn:hover { background: rgba(204,0,119,0.15); }
-.product-iframe { flex: 1; border: none; width: 100%; min-height: 0; background: #111; }
-.product-iframe-fallback { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #1a0028; font-family: 'VT323', monospace; font-size: 20px; color: #e0b3ff; text-align: center; gap: 12px; }
-.product-iframe-fallback .open-btn { padding: 8px 20px; background: none; border: 2px solid var(--content-border); color: #ffb3ff; font-family: 'VT323', monospace; font-size: 20px; cursor: pointer; }
-.product-iframe-fallback .open-btn:hover { background: rgba(204,0,119,0.15); }
-
-/* Case study sections (extends .product-window) */
-.case-section { padding: 0 24px 18px; }
-.case-section h3 {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 11px;
-  color: #ff77c6;
-  letter-spacing: 1px;
-  margin-bottom: 12px;
-  padding-bottom: 8px;
-  border-bottom: 1px dashed #4a2a4a;
-  text-transform: uppercase;
-}
-.case-section p {
-  font-family: 'VT323', monospace;
-  font-size: 21px;
-  color: #e8d8e8;
-  line-height: 1.55;
-  margin-bottom: 12px;
-}
-.case-section p:last-child { margin-bottom: 0; }
-.case-section ul {
-  list-style: none;
-  font-family: 'VT323', monospace;
-  font-size: 21px;
-  color: #e8d8e8;
-  line-height: 1.5;
-  padding-left: 4px;
-}
-.case-section ul li {
-  position: relative;
-  padding-left: 22px;
-  margin-bottom: 10px;
-}
-.case-section ul li::before {
-  content: '\25B8';
-  position: absolute;
-  left: 0;
-  color: #ff77c6;
-}
-.case-section em {
-  color: #ffb3ff;
-  font-style: normal;
-  background: rgba(204,0,119,0.18);
-  padding: 0 4px;
-}
-
-.case-metrics {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  margin: 4px 0 4px;
-}
-.case-metric {
-  background: rgba(204,0,119,0.10);
-  border: 1px solid #4a2a4a;
-  padding: 12px 14px;
-}
-.case-metric-num {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 14px;
-  color: #ff77c6;
-  display: block;
-  margin-bottom: 6px;
-  line-height: 1.3;
-}
-.case-metric-label {
-  font-family: 'VT323', monospace;
-  font-size: 17px;
-  color: #c8b8c8;
-  line-height: 1.35;
-}
-
-.case-video {
-  position: relative;
-  display: block;
-  width: 100%;
-  max-width: 280px;
-  margin: 0 auto;
-  border: 2px solid #4a2a4a;
-  background: #000;
-  cursor: pointer;
-  text-decoration: none;
-  overflow: hidden;
-  transition: all 0.2s;
-}
-.case-video:hover {
-  border-color: #ff77c6;
-  box-shadow: 0 0 16px rgba(204,0,119,0.45);
-}
-.case-video-thumb {
-  display: block;
-  width: 100%;
-  aspect-ratio: 9 / 16;
-  object-fit: cover;
-  background: #111;
-}
-.case-video-play {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: rgba(0,0,0,0.75);
-  border: 2px solid #ff77c6;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffb3ff;
-  font-size: 22px;
-  padding-left: 6px;
-  box-shadow: 0 0 18px rgba(204,0,119,0.6);
-  transition: all 0.2s;
-  pointer-events: none;
-}
-.case-video:hover .case-video-play {
-  background: #cc0077;
-  color: #fff;
-  transform: translate(-50%, -50%) scale(1.08);
-}
-.case-video-caption {
-  font-family: 'VT323', monospace;
-  font-size: 18px;
-  color: #a89aa8;
-  text-align: center;
-  margin-top: 8px;
-  font-style: italic;
-}
-
-.case-buttons {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  padding: 4px 24px 24px;
-}
-.case-buttons .prod-btn {
-  margin-top: 0;
-  display: inline-block;
-  padding: 8px 20px;
-  background: none;
-  border: 2px solid var(--content-border);
-  color: #ffb3ff;
-  font-family: 'VT323', monospace;
-  font-size: 22px;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.case-buttons .prod-btn:hover {
-  background: rgba(204,0,119,0.18);
-  box-shadow: 0 0 12px rgba(204,0,119,0.4);
-}
-
-.case-quote {
-  border-left: 3px solid #ff77c6;
-  padding: 4px 0 4px 14px;
-  margin: 4px 0 12px;
-  font-family: 'VT323', monospace;
-  font-size: 20px;
-  color: #e0b3ff;
-  font-style: italic;
-  line-height: 1.45;
-}
-
-/* "my work" window (auto-opens after splash) */
-.xp-window-body:has(> .mywork-window) { padding: 0; background: #1a0028; overflow: auto; }
-.mywork-window { padding: 22px 24px 24px; }
-.mywork-intro {
-  font-family: 'VT323', monospace;
-  font-size: 22px;
-  color: #e8d8e8;
-  line-height: 1.5;
-  margin-bottom: 18px;
-}
-.mywork-intro strong { color: #ffb3ff; }
-.mywork-card {
-  background: rgba(204,0,119,0.08);
-  border: 1px solid #4a2a4a;
-  padding: 16px 18px;
-  margin-bottom: 14px;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.mywork-card:hover {
-  background: rgba(204,0,119,0.18);
-  border-color: #ff77c6;
-  box-shadow: 0 0 12px rgba(204,0,119,0.3);
-}
-.mywork-card-title {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 12px;
-  color: #ffb3ff;
-  margin-bottom: 8px;
-  letter-spacing: 0.5px;
-}
-.mywork-card-title .mw-icon { margin-right: 8px; }
-.mywork-card-tag {
-  font-family: 'VT323', monospace;
-  font-size: 20px;
-  color: #e0b3ff;
-  margin-bottom: 8px;
-  line-height: 1.4;
-}
-.mywork-card-desc {
-  font-family: 'VT323', monospace;
-  font-size: 19px;
-  color: #c8b8c8;
-  line-height: 1.5;
-  margin-bottom: 10px;
-}
-.mywork-card-stats {
-  font-family: 'VT323', monospace;
-  font-size: 18px;
-  color: #ff77c6;
-  line-height: 1.4;
-  letter-spacing: 0.3px;
-}
-.mywork-cta {
-  display: inline-block;
-  margin-top: 10px;
-  font-family: 'VT323', monospace;
-  font-size: 19px;
-  color: #ffb3ff;
-  letter-spacing: 0.5px;
-}
-.mywork-footer {
-  font-family: 'VT323', monospace;
-  font-size: 18px;
-  color: #a89aa8;
-  font-style: italic;
-  text-align: center;
-  margin-top: 16px;
-  padding-top: 14px;
-  border-top: 1px dashed #4a2a4a;
-  line-height: 1.45;
-}
-
-/* Featured product icon glow on desktop */
-.desktop-icon.featured .icon-img {
-  text-shadow: 0 0 14px rgba(255,119,198,0.85), 0 0 4px rgba(255,179,255,0.6);
-  animation: featuredPulse 2.6s ease-in-out infinite;
-}
-.desktop-icon.featured .icon-label {
-  color: #ffd9ee;
-  text-shadow: 0 0 8px rgba(255,119,198,0.6), 1px 1px 0 #000;
-}
-@keyframes featuredPulse {
-  0%, 100% { filter: drop-shadow(0 0 4px rgba(255,119,198,0.5)); }
-  50%      { filter: drop-shadow(0 0 12px rgba(255,119,198,0.95)); }
-}
-
-/* Arcade / Hobbies */
-.xp-window-body:has(.arcade-root) { padding: 0; background: #050510; overflow: auto; }
-.arcade-root { min-height: 100%; }
-.arcade-fadeout { animation: arcadeFade 0.22s ease forwards; }
-@keyframes arcadeFade {
-  to { opacity: 0; transform: scale(0.98); filter: blur(2px); }
-}
-
-/* ---- Menu (mode select) screen ---- */
-.arcade-menu-screen {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-  animation: arcadeIn 0.3s ease;
-}
-@keyframes arcadeIn {
-  from { opacity: 0; transform: scale(1.02); }
-  to { opacity: 1; transform: scale(1); }
-}
-.arcade-menu-prompt {
-  text-align: center;
-  font-family: 'Press Start 2P', cursive;
-  font-size: 9px;
-  color: #ffeb3b;
-  letter-spacing: 1.5px;
-  margin: 12px 0 28px;
-  line-height: 1.8;
-  animation: arcadeBlink 1.2s infinite;
-}
-@keyframes arcadeBlink { 0%,49%{opacity:1} 50%,100%{opacity:0.45} }
-.arcade-menu-options {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  padding: 0 12px;
-  flex: 1;
-  justify-content: center;
-}
-.arcade-menu-btn {
-  background: #0a0a18;
-  border: 2px solid var(--neon);
-  color: var(--neon);
-  padding: 22px 18px;
-  cursor: pointer;
-  font-family: 'VT323', monospace;
-  text-align: center;
-  position: relative;
-  transition: all 0.18s;
-  box-shadow: 0 0 0 transparent, inset 0 0 0 transparent;
-}
-.arcade-menu-btn:hover {
-  background: #12122a;
-  box-shadow: 0 0 18px color-mix(in srgb, var(--neon) 55%, transparent),
-              inset 0 0 14px color-mix(in srgb, var(--neon) 20%, transparent);
-  transform: translateY(-2px);
-}
-.arcade-menu-btn:active { transform: translateY(0); }
-.amb-players {
-  font-size: 32px;
-  color: var(--neon);
-  text-shadow: 0 0 8px var(--neon);
-  margin-bottom: 4px;
-  letter-spacing: 8px;
-}
-.amb-num {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 14px;
-  color: #fff;
-  text-shadow: 0 0 6px var(--neon);
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-}
-.amb-sub {
-  font-size: 16px;
-  color: #aaa;
-  font-style: italic;
-  margin-bottom: 10px;
-}
-.amb-cta {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 8px;
-  color: var(--neon);
-  letter-spacing: 1.5px;
-  animation: arcadeBlink 1s infinite;
-}
-
-/* ---- List (selected mode) screen ---- */
-.arcade-list-screen { animation: arcadeIn 0.3s ease; }
-.arcade-list-topbar {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 14px;
-  padding-bottom: 12px;
-  border-bottom: 1px dashed #2a2a44;
-}
-.arcade-back-btn {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 8px;
-  color: var(--neon);
-  background: transparent;
-  border: 1.5px solid var(--neon);
-  padding: 6px 10px;
-  cursor: pointer;
-  letter-spacing: 1px;
-  transition: all 0.15s;
-}
-.arcade-back-btn:hover {
-  background: var(--neon);
-  color: #050510;
-  box-shadow: 0 0 10px var(--neon);
-}
-.arcade-list-mode {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 9px;
-  color: var(--neon);
-  text-shadow: 0 0 6px var(--neon);
-  letter-spacing: 1.5px;
-  margin-left: auto;
-}
-.arcade-app {
-  background:
-    repeating-linear-gradient(0deg, rgba(0,255,240,0.025) 0px, rgba(0,255,240,0.025) 1px, transparent 1px, transparent 3px),
-    radial-gradient(ellipse at top, #1a0030 0%, #050510 70%);
-  min-height: 100%;
-  padding: 22px 18px 28px;
-  color: #f0f0ff;
-  font-family: 'VT323', monospace;
-}
-.arcade-header { text-align: center; margin-bottom: 22px; }
-.arcade-title {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 14px;
-  color: #ffeb3b;
-  text-shadow: 0 0 8px rgba(255,235,59,0.7), 0 0 16px rgba(255,235,59,0.4);
-  letter-spacing: 1px;
-  line-height: 1.8;
-  margin-bottom: 8px;
-  animation: arcadeFlicker 4s infinite;
-}
-@keyframes arcadeFlicker {
-  0%,97%,100% { opacity: 1; }
-  98% { opacity: 0.85; }
-  99% { opacity: 1; }
-}
-.arcade-subtitle {
-  font-size: 15px;
-  color: #888;
-  letter-spacing: 1px;
-}
-.arcade-cabinet { margin-bottom: 26px; }
-.arcade-cabinet-header {
-  border-top: 2px solid var(--neon);
-  border-bottom: 2px solid var(--neon);
-  padding: 10px 12px;
-  margin-bottom: 14px;
-  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.04) 50%, transparent 100%);
-  box-shadow: 0 0 12px color-mix(in srgb, var(--neon) 30%, transparent), inset 0 0 8px color-mix(in srgb, var(--neon) 10%, transparent);
-}
-.arcade-cab-label {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 10px;
-  color: var(--neon);
-  text-shadow: 0 0 6px var(--neon);
-  display: block;
-  margin-bottom: 6px;
-  letter-spacing: 1px;
-}
-.arcade-cab-sub {
-  font-size: 16px;
-  color: #aaa;
-  font-style: italic;
-}
-.arcade-cards { display: flex; flex-direction: column; gap: 12px; }
-.arcade-card {
-  display: flex;
-  gap: 12px;
-  background: #0a0a18;
-  border: 2px solid #2a2a44;
-  padding: 12px;
-  transition: all 0.2s;
-  position: relative;
-}
-.arcade-card:hover {
-  border-color: var(--neon);
-  box-shadow: 0 0 14px color-mix(in srgb, var(--neon) 40%, transparent);
-  transform: translate(-1px, -1px);
-}
-.arcade-cover {
-  width: 140px;
-  height: 80px;
-  flex-shrink: 0;
-  background: #1a1a2e;
-  border: 1px solid #3a3a5a;
-  position: relative;
-  overflow: hidden;
-}
-.arcade-cover img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  image-rendering: pixelated;
-  filter: saturate(1.1) contrast(1.05);
-  display: block;
-}
-.arcade-cover-fallback {
-  position: absolute; inset: 0;
-  background: linear-gradient(135deg, #1a0030 0%, #2a0050 100%);
-  font-family: 'Press Start 2P', cursive;
-  font-size: 7px;
-  color: var(--neon);
-  text-shadow: 0 0 4px var(--neon);
-  text-align: center;
-  padding: 8px;
-  line-height: 1.8;
-  align-items: center;
-  justify-content: center;
-}
-.arcade-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
-.arcade-game-title {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 9px;
-  color: #fff;
-  line-height: 1.8;
-  margin-bottom: 8px;
-  letter-spacing: 0.5px;
-}
-.arcade-blurb {
-  font-size: 16px;
-  color: #c8c8d8;
-  line-height: 1.35;
-  margin-bottom: 10px;
-  flex: 1;
-}
-.arcade-btn {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 8px;
-  color: var(--neon);
-  border: 1.5px solid var(--neon);
-  padding: 6px 10px;
-  text-decoration: none;
-  align-self: flex-start;
-  letter-spacing: 1px;
-  transition: all 0.15s;
-  background: transparent;
-}
-.arcade-btn:hover {
-  background: var(--neon);
-  color: #050510;
-  box-shadow: 0 0 12px var(--neon);
-}
-.arcade-footer {
-  text-align: center;
-  font-family: 'Press Start 2P', cursive;
-  font-size: 8px;
-  color: #ffeb3b;
-  text-shadow: 0 0 6px rgba(255,235,59,0.6);
-  margin-top: 18px;
-  letter-spacing: 1px;
-  line-height: 1.8;
-  animation: arcadeFlicker 4s infinite;
-}
-
-/* Music player \u2014 retro arcade jukebox */
-.xp-window-body:has(> .music-app) { padding: 0; background: #0a0a14; overflow: auto; }
-.music-app {
-  background:
-    repeating-linear-gradient(0deg, rgba(0,255,180,0.04) 0px, rgba(0,255,180,0.04) 1px, transparent 1px, transparent 3px),
-    radial-gradient(ellipse at top, #1a0030 0%, #0a0a14 75%);
-  min-height: 100%;
-  padding: 16px 14px 22px;
-  font-family: 'VT323', monospace;
-  color: #e0b3ff;
-}
-
-/* LCD-style header with album art + marquee + equalizer */
-.music-lcd {
-  display: flex;
-  gap: 12px;
-  background: #0a0a18;
-  border: 2px solid #ff77c6;
-  padding: 12px;
-  box-shadow:
-    0 0 14px rgba(255,119,198,0.35),
-    inset 0 0 18px rgba(255,119,198,0.08);
-  margin-bottom: 14px;
-}
-.music-cover-art {
-  width: 90px; height: 90px;
-  object-fit: cover;
-  border: 2px solid #ff77c6;
-  box-shadow: 0 0 8px rgba(255,119,198,0.4);
-  flex-shrink: 0;
-  image-rendering: auto;
-  background: #1a1a2e;
-}
-.music-lcd-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
-.music-lcd-title {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 11px;
-  color: #ffeb3b;
-  text-shadow: 0 0 6px rgba(255,235,59,0.7);
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-  line-height: 1.6;
-}
-.music-marquee {
-  overflow: hidden;
-  white-space: nowrap;
-  background: #050510;
-  border: 1px inset #4a1a3a;
-  padding: 4px 0;
-  margin-bottom: 10px;
-}
-.music-marquee span {
-  display: inline-block;
-  padding-left: 100%;
-  font-size: 16px;
-  color: #ff77c6;
-  text-shadow: 0 0 4px rgba(255,119,198,0.6);
-  letter-spacing: 1px;
-  animation: marquee 18s linear infinite;
-}
-@keyframes marquee { to { transform: translateX(-100%); } }
-
-/* Pixel sparkle field (replaces the EQ bars) */
-.music-sparkles {
-  display: flex;
-  gap: 4px;
-  align-items: center;
-  justify-content: space-around;
-  height: 22px;
-  margin-top: auto;
-  padding: 2px 6px;
-  background: #050510;
-  border: 1px inset #4a1a3a;
-  overflow: hidden;
-}
-.sparkle {
-  font-size: 11px;
-  line-height: 1;
-  color: #ff77c6;
-  text-shadow: 0 0 4px rgba(255,119,198,0.9), 0 0 8px rgba(255,119,198,0.5);
-  opacity: 0.2;
-  transform: scale(0.7);
-  animation: sparkleTwinkle 1.6s ease-in-out infinite;
-  will-change: opacity, transform;
-}
-.sparkle:nth-child(3n)   { color: #ffb3ff; text-shadow: 0 0 4px rgba(255,179,255,0.9), 0 0 8px rgba(255,179,255,0.5); }
-.sparkle:nth-child(4n+1) { color: #fff;     text-shadow: 0 0 4px rgba(255,255,255,0.95), 0 0 8px rgba(255,119,198,0.6); }
-@keyframes sparkleTwinkle {
-  0%, 100% { opacity: 0.15; transform: scale(0.6) rotate(0deg); }
-  45%      { opacity: 1;    transform: scale(1.2) rotate(180deg); }
-  55%      { opacity: 1;    transform: scale(1.2) rotate(180deg); }
-}
-
-/* Prev / counter / next navigation bar */
-.music-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  background: #050510;
-  border-top: 1px dashed #2a2a44;
-  border-bottom: 1px dashed #2a2a44;
-  padding: 8px 10px;
-  margin-bottom: 12px;
-}
-.music-nav-btn {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 8px;
-  color: #ff00aa;
-  background: transparent;
-  border: 1.5px solid #ff00aa;
-  padding: 8px 12px;
-  letter-spacing: 1.5px;
-  cursor: pointer;
-  transition: all 0.15s;
-  text-shadow: 0 0 4px rgba(255,0,170,0.5);
-}
-.music-nav-btn:hover {
-  background: #ff00aa;
-  color: #050510;
-  text-shadow: none;
-  box-shadow: 0 0 10px rgba(255,0,170,0.7);
-}
-.music-nav-btn:active { transform: translateY(1px); }
-.music-counter {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 9px;
-  color: #ffeb3b;
-  text-shadow: 0 0 6px rgba(255,235,59,0.6);
-  letter-spacing: 1.5px;
-}
-.music-counter-num { color: #ff77c6; text-shadow: 0 0 6px rgba(255,119,198,0.7); }
-
-/* Stage holds all 5 embeds, only the active one is visible */
-.music-stage {
-  background: #0a0a18;
-  border: 2px solid #2a2a44;
-  padding: 10px;
-  margin-bottom: 12px;
-  min-height: 172px;
-}
-.music-track iframe {
-  border-radius: 6px;
-  display: block;
-  background: transparent;
-  width: 100%;
-}
-
-/* Quick-jump track selector strip (horizontally scrollable on small widths) */
-.music-tabs {
-  display: flex;
-  gap: 6px;
-  overflow-x: auto;
-  padding: 4px 2px 8px;
-  scrollbar-width: thin;
-  scrollbar-color: #2a2a44 transparent;
-}
-.music-tabs::-webkit-scrollbar { height: 4px; }
-.music-tabs::-webkit-scrollbar-thumb { background: #2a2a44; border-radius: 2px; }
-.music-tab {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 7px;
-  color: #6a6a8a;
-  background: transparent;
-  border: 1.5px solid #2a2a44;
-  padding: 6px 8px;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: all 0.15s;
-  flex-shrink: 0;
-}
-.music-tab:hover { color: #ff77c6; border-color: #ff77c6; }
-.music-tab.active {
-  color: #050510;
-  background: #ff77c6;
-  border-color: #ff77c6;
-  text-shadow: none;
-  box-shadow: 0 0 10px rgba(255,119,198,0.7);
-}
-
-/* Footer */
-.music-footer {
-  text-align: center;
-  font-family: 'Press Start 2P', cursive;
-  font-size: 7px;
-  color: #ffeb3b;
-  text-shadow: 0 0 4px rgba(255,235,59,0.5);
-  margin-top: 18px;
-  letter-spacing: 1px;
-  line-height: 1.8;
-  animation: arcadeFlicker 4s infinite;
-}
-
-/* Bakery / cake gallery */
-.xp-window-body:has(> .cake-gallery) { overflow: hidden; padding: 0; display: flex; }
-.cake-gallery { display: flex; flex-direction: column; flex: 1; min-height: 0; width: 100%; background: var(--content-bg); }
-.cake-gallery .cake-main {
-  flex: 1; display: flex; align-items: center; justify-content: center;
-  background: #2a0020; padding: 16px; min-height: 0; position: relative;
-}
-.cake-gallery .cake-main img {
-  max-width: 100%; max-height: 100%; object-fit: contain;
-  border: 2px solid var(--content-border);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-}
-.cake-gallery .cake-main .cake-empty {
-  font-family: 'VT323', monospace; font-size: 22px; color: #ffb3d9; text-align: center; line-height: 1.5;
-}
-.cake-gallery .cake-nav {
-  position: absolute; top: 50%; transform: translateY(-50%);
-  background: rgba(255,255,255,0.85); border: 2px solid var(--content-border);
-  width: 36px; height: 36px; cursor: pointer; font-size: 18px; font-weight: bold;
-  color: var(--content-heading); display: flex; align-items: center; justify-content: center;
-}
-.cake-gallery .cake-nav:hover { background: #fff; }
-.cake-gallery .cake-nav.prev { left: 12px; }
-.cake-gallery .cake-nav.next { right: 12px; }
-.cake-gallery .cake-caption {
-  font-family: 'VT323', monospace; font-size: 18px; color: var(--content-text);
-  text-align: center; padding: 8px 12px; background: var(--content-bg);
-  border-top: 2px solid var(--content-border);
-}
-.cake-gallery .cake-thumbs {
-  display: flex; gap: 6px; padding: 8px; background: #fff0f8;
-  border-top: 2px solid var(--content-border); overflow-x: auto; flex-shrink: 0;
-}
-.cake-gallery .cake-thumb {
-  width: 64px; height: 64px; flex-shrink: 0; cursor: pointer;
-  border: 2px solid #d8a8c8; background: #d0d0d0;
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'VT323', monospace; font-size: 11px; color: #888; overflow: hidden;
-}
-.cake-gallery .cake-thumb img { width: 100%; height: 100%; object-fit: cover; }
-.cake-gallery .cake-thumb.active { border-color: var(--content-heading); box-shadow: 0 0 0 2px #ffb3d9; }
-.cake-gallery .cake-thumb:hover { border-color: var(--content-heading); }
-.image-grid .img-placeholder {
-  background: #d0d0d0;
-  border: 2px solid var(--content-border);
-  aspect-ratio: 4/3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'VT323', monospace;
-  font-size: 18px;
-  color: #666;
-}
-
-/* Cat pic view */
-.cat-pic-view {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  background: var(--content-bg);
-}
-.cat-pic-view .cat-img {
-  width: 100%;
-  max-width: 400px;
-  aspect-ratio: 4/3;
-  object-fit: cover;
-  border: 2px solid var(--content-border);
-  background: #d0d0d0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'VT323', monospace;
-  font-size: 20px;
-  color: #666;
-}
-.cat-pic-view img.cat-img { background: none; }
-.cat-pic-view .cat-caption {
-  margin-top: 12px;
-  font-family: 'VT323', monospace;
-  font-size: 20px;
-  color: var(--content-text);
-  text-align: center;
-}
-
-/* WinAmp style */
-.winamp-view {
-  background: #1a1a2e;
-  padding: 16px;
-  min-height: 100%;
-  color: #ff69b4;
-  font-family: 'VT323', monospace;
-}
-.winamp-view .wa-title {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 7px;
-  color: #ff69b4;
-  margin-bottom: 12px;
-  text-transform: uppercase;
-}
-.winamp-view .wa-display {
-  background: #0a0a1a;
-  border: 2px inset #333;
-  padding: 10px;
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.spinning-disc {
-  width: 48px; height: 48px;
-  border-radius: 50%;
-  border: 3px solid #ff69b4;
-  background: radial-gradient(circle, #333 30%, #1a1a2e 70%);
-  animation: spin 2s linear infinite;
-  flex-shrink: 0;
-  position: relative;
-}
-.spinning-disc::after {
-  content: '';
-  position: absolute;
-  top: 50%; left: 50%;
-  width: 8px; height: 8px;
-  background: #ff69b4;
-  border-radius: 50%;
-  transform: translate(-50%,-50%);
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-.wa-now-playing { font-size: 18px; color: #00ff88; }
-.wa-tracklist { margin-top: 8px; }
-.wa-track {
-  font-size: 17px;
-  padding: 4px 6px;
-  color: #ff69b4;
-  border-bottom: 1px solid #222;
-}
-.wa-track:hover { background: rgba(255,105,180,0.1); }
-.wa-track.active { color: #00ff88; }
-
-/* Properties / About window */
-.properties-view {
-  background: var(--xp-button-face);
-  padding: 16px;
-}
-.properties-view p {
-  font-size: 12px;
-  margin-bottom: 6px;
-  line-height: 1.5;
-}
-.properties-view .prop-label { font-weight: bold; }
-
-/* Contact form */
-.contact-view {
-  background: var(--content-bg);
-  padding: 20px;
-}
-.contact-view h2 {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 8px;
-  color: var(--content-heading);
-  margin-bottom: 14px;
-}
-.contact-view label {
-  font-family: 'VT323', monospace;
-  font-size: 18px;
-  color: var(--content-text);
-  display: block;
-  margin-bottom: 4px;
-  margin-top: 10px;
-}
-.contact-view input, .contact-view textarea {
-  width: 100%;
-  padding: 6px 8px;
-  font-family: 'VT323', monospace;
-  font-size: 17px;
-  border: 2px solid var(--content-border);
-  background: #fff;
-  outline: none;
-  border-radius: 0;
-}
-.contact-view textarea { height: 90px; resize: vertical; }
-.contact-view .send-btn {
-  margin-top: 14px;
-  background: var(--xp-button-face);
-  border: 2px outset #ddd;
-  padding: 6px 18px;
-  font-family: 'VT323', monospace;
-  font-size: 18px;
-  color: var(--content-text);
-  cursor: pointer;
-}
-.contact-view .send-btn:active { border-style: inset; }
-
-/* ===== MINI BROWSER ===== */
-.browser-toolbar {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 6px;
-  background: var(--xp-button-face);
-  border-bottom: 1px solid #b8b4a8;
-  flex-shrink: 0;
-}
-.browser-toolbar .nav-btn {
-  width: 24px; height: 22px;
-  background: linear-gradient(to bottom, #fff 0%, #e8e0d4 100%);
-  border: 1px solid #999;
-  border-radius: 2px;
-  font-size: 12px;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-}
-.browser-toolbar .nav-btn:hover { background: #f0ebe0; }
-.browser-toolbar .nav-btn:active { border-style: inset; }
-.browser-toolbar .url-bar {
-  flex: 1;
-  height: 22px;
-  padding: 0 6px;
-  font-family: Tahoma, sans-serif;
-  font-size: 11px;
-  border: 1px inset #b8b4a8;
-  background: #fff;
-  color: #333;
-  outline: none;
-  border-radius: 0;
-}
-.browser-frame {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: 0;
-}
-.xp-window-body:has(.browser-frame) {
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-.browser-frame iframe {
-  flex: 1;
-  width: 100%;
-  border: none;
-  background: #fff;
-}
-.browser-fallback {
-  flex: 1;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 14px;
-  background: #1a0028;
-  padding: 36px 28px;
-  text-align: center;
-  border-top: 2px solid var(--content-border);
-}
-.browser-fallback .bf-sparkle {
-  font-size: 42px;
-  margin-bottom: 4px;
-}
-.browser-fallback .bf-heading {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 12px;
-  color: #ffb3ff;
-  line-height: 1.8;
-  letter-spacing: 0.5px;
-  margin-bottom: 4px;
-}
-.browser-fallback .bf-sub {
-  font-family: 'VT323', monospace;
-  font-size: 20px;
-  color: #e0b3ff;
-  line-height: 1.4;
-  margin: 0;
-}
-.browser-fallback .open-btn {
-  margin-top: 10px;
-  padding: 8px 22px;
-  background: transparent;
-  border: 2px solid var(--content-border);
-  color: #ffb3ff;
-  font-family: 'VT323', monospace;
-  font-size: 20px;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.browser-fallback .open-btn:hover { background: rgba(204,0,119,0.18); box-shadow: 0 0 12px rgba(204,0,119,0.4); }
-.browser-fallback .open-btn:active { transform: translateY(1px); }
-
-/* ===== CONTEXT MENU ===== */
-#context-menu {
-  position: absolute;
-  background: #fff;
-  border: 2px solid #888;
-  box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-  z-index: 9000;
-  display: none;
-  min-width: 180px;
-  padding: 2px 0;
-  font-size: 12px;
-}
-#context-menu .ctx-item {
-  padding: 4px 24px 4px 24px;
-  cursor: default;
-  position: relative;
-  white-space: nowrap;
-}
-#context-menu .ctx-item:hover { background: #0a246a; color: #fff; }
-#context-menu .ctx-divider { border-top: 1px solid #ccc; margin: 2px 0; }
-#context-menu .ctx-submenu {
-  display: none;
-  position: absolute;
-  left: 100%; top: -2px;
-  background: #fff;
-  border: 2px solid #888;
-  box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-  min-width: 150px;
-  padding: 2px 0;
-}
-#context-menu .ctx-item.has-sub:hover .ctx-submenu { display: block; }
-#context-menu .ctx-item.has-sub::after { content: '\u25B6'; position: absolute; right: 8px; font-size: 8px; top: 50%; transform: translateY(-50%); }
-#context-menu .ctx-submenu .ctx-item:hover { background: #0a246a; color: #fff; }
-
-/* ===== FAKE VIRUS POPUPS ===== */
-.fake-popup {
-  position: absolute;
-  width: 260px;
-  background: var(--xp-button-face);
-  border: 2px solid #0055ea;
-  border-radius: 8px 8px 0 0;
-  box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
-  animation: popupIn 0.25s ease-out;
-  overflow: hidden;
-}
-@keyframes popupIn {
-  from { transform: scale(0.3); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-.fake-popup .fp-titlebar {
-  background: linear-gradient(to bottom, #0058e6 0%, #3a8cff 10%, #4d97ff 18%, #2a7fff 50%, #0f6af5 84%, #0052d6 100%);
-  height: 22px;
-  display: flex;
-  align-items: center;
-  padding: 0 4px;
-  border-radius: 6px 6px 0 0;
-  cursor: move;
-  user-select: none;
-}
-.fake-popup .fp-titlebar .fp-icon { font-size: 11px; margin-right: 4px; }
-.fake-popup .fp-titlebar .fp-title {
-  flex: 1;
-  color: #fff;
-  font-size: 11px;
-  font-weight: bold;
-  text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
-}
-.fake-popup .fp-titlebar .fp-close {
-  width: 16px; height: 16px;
-  background: linear-gradient(to bottom, #e88 0%, #d66 45%, #c44 50%, #e88 100%);
-  border: 1px solid #999;
-  border-radius: 2px;
-  font-size: 9px;
-  display: flex; align-items: center; justify-content: center;
-  color: #fff;
-  cursor: pointer;
-}
-.fake-popup .fp-close:hover { background: linear-gradient(to bottom, #f99 0%, #e77 45%, #d55 50%, #f99 100%); }
-.fake-popup .fp-body {
-  padding: 12px 14px;
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-}
-.fake-popup .fp-warn { font-size: 24px; flex-shrink: 0; }
-.fake-popup .fp-msg {
-  font-size: 11px;
-  color: #000;
-  line-height: 1.5;
-}
-.fake-popup .fp-btnbar {
-  display: flex;
-  justify-content: center;
-  padding: 4px 14px 10px;
-}
-.fake-popup .fp-ok {
-  min-width: 70px;
-  padding: 3px 14px;
-  background: var(--xp-button-face);
-  border: 2px outset #ddd;
-  font-size: 11px;
-  cursor: pointer;
-}
-.fake-popup .fp-ok:active { border-style: inset; }
-
-/* ===== SPLASH / WIZARD ===== */
-#splash-screen {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  bottom: 36px;
-  z-index: 55;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  pointer-events: none;
-}
-#splash-wizard {
-  background: var(--xp-button-face);
-  border: 2px solid #0055ea;
-  border-radius: 8px 8px 0 0;
-  width: 520px;
-  max-width: 94vw;
-  box-shadow: 4px 4px 16px rgba(0,0,0,0.5);
-  animation: wizardIn 0.45s ease-out;
-  display: none;
-  flex-direction: column;
-  z-index: 56;
-  pointer-events: auto;
-}
-@keyframes wizardIn {
-  from { transform: scale(0.7); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-#splash-wizard .wizard-titlebar {
-  background: linear-gradient(to bottom, #0058e6 0%, #3a8cff 10%, #4d97ff 18%, #2a7fff 50%, #0f6af5 84%, #0052d6 100%);
-  height: 28px;
-  display: flex;
-  align-items: center;
-  padding: 0 4px;
-  border-radius: 6px 6px 0 0;
-}
-#splash-wizard .wizard-titlebar .wt-icon { font-size: 14px; margin-right: 6px; }
-#splash-wizard .wizard-titlebar .wt-title {
-  flex: 1; color: #fff; font-size: 12px; font-weight: bold;
-  text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
-}
-#splash-wizard .wizard-titlebar .wt-btns { display: flex; gap: 2px; }
-#splash-wizard .wizard-titlebar .wt-btn {
-  width: 20px; height: 20px;
-  background: linear-gradient(to bottom, #fff 0%, #dfd8cb 45%, #c8c0b0 50%, #e8e0d4 100%);
-  border: 1px solid #999;
-  border-radius: 3px;
-  font-size: 9px;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; color: #666;
-}
-#splash-wizard .wizard-titlebar .wt-btn.wt-close { background: linear-gradient(to bottom, #e88 0%, #d66 45%, #c44 50%, #e88 100%); color: #fff; }
-.wizard-body {
-  padding: 18px 20px 12px;
-  display: flex;
-  gap: 16px;
-}
-.wizard-thumb {
-  width: 90px; height: 100px;
-  flex-shrink: 0;
-  border: 2px solid #888;
-  background: url('me-thumb.png') center/cover no-repeat;
-  background-color: #d0d0d0;
-}
-.wizard-text { flex: 1; }
-.wizard-text .wt-heading {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 9px;
-  color: #003399;
-  margin-bottom: 10px;
-  line-height: 1.6;
-}
-.shimmer {
-  background: linear-gradient(90deg, #003399 0%, #0066cc 50%, #003399 100%);
-  background-size: 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmer 2s ease-in-out infinite;
-}
-@keyframes shimmer { 0%,100%{background-position:0%} 50%{background-position:100%} }
-.wizard-text .wt-body {
-  font-size: 12px;
-  line-height: 1.6;
-  color: #000;
-}
-.wizard-text .wt-body ul { padding-left: 18px; margin: 6px 0; }
-.wizard-text .wt-body li { margin-bottom: 2px; }
-.wizard-progress-area { padding: 4px 20px 12px; }
-.xp-progress {
-  width: 100%;
-  height: 20px;
-  background: #fff;
-  border: 1px solid #888;
-  overflow: hidden;
-  position: relative;
-}
-.xp-progress-bar {
-  height: 100%;
-  width: 0%;
-  background: repeating-linear-gradient(90deg, #3b82f6 0px, #3b82f6 10px, #60a5fa 10px, #60a5fa 12px);
-  transition: width 2s ease-in-out;
-}
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-.wizard-buttons {
-  display: flex;
-  justify-content: flex-end;
-  gap: 6px;
-  padding: 8px 20px 14px;
-  border-top: 1px solid #ccc;
-}
-.xp-btn {
-  min-width: 75px;
-  padding: 4px 12px;
-  background: var(--xp-button-face);
-  border: 2px outset #ddd;
-  font-family: Tahoma, sans-serif;
-  font-size: 12px;
-  cursor: pointer;
-}
-.xp-btn:active { border-style: inset; }
-.xp-btn:hover { background: #f0ebe0; }
-
-/* ===== SHUTDOWN OVERLAY ===== */
-#shutdown-overlay {
-  position: fixed; inset: 0;
-  background: #000;
-  z-index: 90000;
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  animation: fadeIn 0.5s ease;
-}
-@keyframes fadeIn { from{opacity:0} to{opacity:1} }
-#shutdown-overlay .shutdown-text {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 12px;
-  color: #ff8800;
-  margin-bottom: 30px;
-  text-align: center;
-  line-height: 2;
-}
-#shutdown-overlay .go-back-btn {
-  padding: 8px 20px;
-  background: none;
-  border: 2px solid #ff8800;
-  color: #ff8800;
-  font-family: 'VT323', monospace;
-  font-size: 20px;
-  cursor: pointer;
-}
-#shutdown-overlay .go-back-btn:hover { background: rgba(255,136,0,0.15); }
-
-/* scrollbar xp style */
-.xp-window-body::-webkit-scrollbar { width: 16px; }
-.xp-window-body::-webkit-scrollbar-track { background: #eee; border-left: 1px solid #ccc; }
-.xp-window-body::-webkit-scrollbar-thumb { background: linear-gradient(to right, #ccc, #aaa); border: 1px solid #888; }
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -2228,11 +282,11 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: Tahoma, G
 </div>
 
 <!-- RECYCLE BIN CONTEXT MENU -->
-<div id="recycle-menu" style="position:absolute;background:#fff;border:2px solid #888;box-shadow:2px 2px 4px rgba(0,0,0,0.3);z-index:9000;display:none;min-width:160px;padding:2px 0;font-size:12px;">
-  <div class="ctx-item" style="padding:4px 24px;cursor:default;" onmouseenter="this.style.background='#0a246a';this.style.color='#fff'" onmouseleave="this.style.background='';this.style.color=''" onclick="hideRecycleBinMenu(); alert('nothing in here... or is there? ;)')">open</div>
-  <div class="ctx-item" style="padding:4px 24px;cursor:default;" onmouseenter="this.style.background='#0a246a';this.style.color='#fff'" onmouseleave="this.style.background='';this.style.color=''" onclick="hideRecycleBinMenu(); alert('you can\'t empty what\'s already empty... just like my soul :(')">empty recycle bin</div>
-  <div style="border-top:1px solid #ccc;margin:2px 0;"></div>
-  <div class="ctx-item" style="padding:4px 24px;cursor:default;" onmouseenter="this.style.background='#0a246a';this.style.color='#fff'" onmouseleave="this.style.background='';this.style.color=''" onclick="hideRecycleBinMenu(); alert('properties: it\'s a bin. it recycles. what more do u want?')">properties</div>
+<div id="recycle-menu">
+  <div class="ctx-item" onclick="hideRecycleBinMenu(); alert('nothing in here... or is there? ;)')">open</div>
+  <div class="ctx-item" onclick="hideRecycleBinMenu(); alert('you can\'t empty what\'s already empty... just like my soul :(')">empty recycle bin</div>
+  <div class="ctx-divider"></div>
+  <div class="ctx-item" onclick="hideRecycleBinMenu(); alert('properties: it\'s a bin. it recycles. what more do u want?')">properties</div>
 </div>
 
 <!-- SHUTDOWN OVERLAY -->
@@ -2281,6 +335,39 @@ let windowIdCounter = 0;
 let topZ = 100;
 const openWindows = {};
 let offsetCounter = 0;
+const LAYOUT_BASE_W = 1280;
+const LAYOUT_BASE_H = 764;
+const TASKBAR_H = 36;
+
+function setWindowSizeVars(el, w, h) {
+  const minW = Math.min(280, Math.round(w * 0.55));
+  const minH = Math.min(200, Math.round(h * 0.45));
+  el.style.setProperty('--win-w-pct', (w / LAYOUT_BASE_W * 100).toFixed(3));
+  el.style.setProperty('--win-h-pct', (h / LAYOUT_BASE_H * 100).toFixed(3));
+  el.style.setProperty('--win-max-w', w + 'px');
+  el.style.setProperty('--win-max-h', h + 'px');
+  el.style.setProperty('--win-min-w', minW + 'px');
+  el.style.setProperty('--win-min-h', minH + 'px');
+}
+
+function clampWindowPosition(el) {
+  const vw = window.innerWidth;
+  const vh = window.innerHeight - TASKBAR_H;
+  const w = el.offsetWidth;
+  const h = el.offsetHeight;
+  let x = el.offsetLeft;
+  let y = el.offsetTop;
+  x = Math.max(10, Math.min(x, vw - w - 10));
+  y = Math.max(10, Math.min(y, vh - h - 10));
+  el.style.left = x + 'px';
+  el.style.top = y + 'px';
+}
+
+function clampAllWindows() {
+  Object.values(openWindows).forEach(w => {
+    if (!w.maximized && w.el.style.display !== 'none') clampWindowPosition(w.el);
+  });
+}
 
 function renderIcon(icon, size) {
   if (!icon) return '\uD83D\uDCC4';
@@ -2295,7 +382,7 @@ function renderIcon(icon, size) {
 function getNextOffset(w, h) {
   offsetCounter++;
   const vw = window.innerWidth;
-  const vh = window.innerHeight - 36; // taskbar
+  const vh = window.innerHeight - TASKBAR_H; // taskbar
   const centerX = Math.max(20, (vw - w) / 2);
   const centerY = Math.max(20, (vh - h) / 2);
   // Cascade subsequent windows slightly down-right from center
@@ -2310,14 +397,17 @@ function getNextOffset(w, h) {
 
 function createWindow(title, icon, contentHTML, opts = {}) {
   const id = 'win-' + (++windowIdCounter);
-  const w = opts.width || 520;
+  const w = opts.width || 1040;
   const h = opts.height || 400;
-  const off = getNextOffset(w, h);
 
   const win = document.createElement('div');
   win.className = 'xp-window';
   win.id = id;
-  win.style.cssText = `left:${off.x}px;top:${off.y}px;width:${w}px;height:${h}px;z-index:${++topZ};`;
+  win.style.zIndex = ++topZ;
+  setWindowSizeVars(win, w, h);
+  win.style.visibility = 'hidden';
+  win.style.left = '0';
+  win.style.top = '0';
 
   win.innerHTML = `
     <div class="xp-titlebar" data-win="${id}">
@@ -2329,15 +419,44 @@ function createWindow(title, icon, contentHTML, opts = {}) {
         <button class="titlebar-btn close-btn" onclick="closeWindow('${id}')" title="Close">✕</button>
       </div>
     </div>
-    <div class="xp-window-body">${contentHTML}</div>`;
+    <div class="xp-window-body"><div class="win-scale">${contentHTML}</div></div>
+    <div class="win-resize-handle wrh-n" data-dir="n"></div>
+    <div class="win-resize-handle wrh-s" data-dir="s"></div>
+    <div class="win-resize-handle wrh-e" data-dir="e"></div>
+    <div class="win-resize-handle wrh-w" data-dir="w"></div>
+    <div class="win-resize-handle wrh-nw" data-dir="nw"></div>
+    <div class="win-resize-handle wrh-ne" data-dir="ne"></div>
+    <div class="win-resize-handle wrh-sw" data-dir="sw"></div>
+    <div class="win-resize-handle wrh-se" data-dir="se"></div>`;
 
   document.getElementById('windows-container').appendChild(win);
+  const off = getNextOffset(win.offsetWidth, win.offsetHeight);
+  win.style.left = off.x + 'px';
+  win.style.top = off.y + 'px';
+  win.style.visibility = '';
 
-  openWindows[id] = { title, icon, el: win, minimized: false, maximized: false, prevStyle: null };
+  openWindows[id] = { title, icon, el: win, minimized: false, maximized: false, prevStyle: null, baseW: w, baseH: h };
   addTaskbarButton(id, title, icon);
   makeDraggable(win);
+  makeResizable(win);
+  updateWindowScale(id);
   focusWindow(id);
   return id;
+}
+
+/* Scale a window's content (fonts and all) proportionally to its current size */
+function updateWindowScale(id) {
+  const w = openWindows[id];
+  if (!w) return;
+  const el = w.el;
+  // Media / embedded-app windows fill naturally; don't font-zoom them (avoids double scaling).
+  if (el.querySelector('.arcade-root, .music-app, .browser-frame, .cake-gallery')) return;
+  const ratioW = el.offsetWidth / w.baseW;
+  const ratioH = el.offsetHeight / w.baseH;
+  let scale = Math.min(ratioW, ratioH);
+  if (!isFinite(scale) || scale <= 0) scale = 1;
+  scale = Math.max(0.72, Math.min(scale, 1.9));
+  el.style.setProperty('--win-scale', scale.toFixed(3));
 }
 
 function focusWindow(id) {
@@ -2368,16 +487,22 @@ function maximizeWindow(id) {
     if (w.prevStyle) {
       w.el.style.left = w.prevStyle.left;
       w.el.style.top = w.prevStyle.top;
-      w.el.style.width = w.prevStyle.width;
-      w.el.style.height = w.prevStyle.height;
+      setWindowSizeVars(w.el, w.prevStyle.baseW, w.prevStyle.baseH);
     }
     w.maximized = false;
+    requestAnimationFrame(() => clampWindowPosition(w.el));
   } else {
-    w.prevStyle = { left: w.el.style.left, top: w.el.style.top, width: w.el.style.width, height: w.el.style.height };
+    w.prevStyle = {
+      left: w.el.style.left,
+      top: w.el.style.top,
+      baseW: w.baseW,
+      baseH: w.baseH
+    };
     w.el.classList.add('maximized');
     w.maximized = true;
   }
   focusWindow(id);
+  requestAnimationFrame(() => updateWindowScale(id));
 }
 
 function closeWindow(id) {
@@ -2435,6 +560,7 @@ function makeDraggable(win) {
     focusWindow(win.id);
     if (e.target.closest('.titlebar-buttons')) return;
     if (e.target.closest('.xp-window-body')) return;
+    if (e.target.classList.contains('win-resize-handle')) return;
     const w = openWindows[win.id];
     if (w && w.maximized) return;
     dragging = true;
@@ -2450,7 +576,69 @@ function makeDraggable(win) {
     win.style.top = (origY + e.clientY - startY) + 'px';
   });
 
-  document.addEventListener('mouseup', () => { dragging = false; });
+  document.addEventListener('mouseup', () => {
+    if (dragging) clampWindowPosition(win);
+    dragging = false;
+  });
+}
+
+/* Resizing via edge / corner handles (desktop-style) */
+function makeResizable(win) {
+  const MIN_W = 300, MIN_H = 200;
+  win.querySelectorAll('.win-resize-handle').forEach(handle => {
+    handle.addEventListener('mousedown', e => {
+      const w = openWindows[win.id];
+      if (!w || w.maximized) return;
+      e.preventDefault();
+      e.stopPropagation();
+      focusWindow(win.id);
+
+      const dir = handle.dataset.dir;
+      const startX = e.clientX, startY = e.clientY;
+      const rect = win.getBoundingClientRect();
+      const startW = rect.width, startH = rect.height;
+      const startL = win.offsetLeft, startT = win.offsetTop;
+      const vw = window.innerWidth;
+      const vh = window.innerHeight - TASKBAR_H;
+
+      function onMove(ev) {
+        const dx = ev.clientX - startX;
+        const dy = ev.clientY - startY;
+        let newW = startW, newH = startH, newL = startL, newT = startT;
+
+        if (dir.includes('e')) newW = startW + dx;
+        if (dir.includes('s')) newH = startH + dy;
+        if (dir.includes('w')) { newW = startW - dx; newL = startL + dx; }
+        if (dir.includes('n')) { newH = startH - dy; newT = startT + dy; }
+
+        if (newW < MIN_W) { if (dir.includes('w')) newL -= (MIN_W - newW); newW = MIN_W; }
+        if (newH < MIN_H) { if (dir.includes('n')) newT -= (MIN_H - newH); newH = MIN_H; }
+
+        newW = Math.min(newW, vw - 10);
+        newH = Math.min(newH, vh - 10);
+        newL = Math.max(0, Math.min(newL, vw - newW));
+        newT = Math.max(0, Math.min(newT, vh - newH));
+
+        win.style.width = newW + 'px';
+        win.style.height = newH + 'px';
+        win.style.left = newL + 'px';
+        win.style.top = newT + 'px';
+        updateWindowScale(win.id);
+      }
+
+      function onUp() {
+        document.removeEventListener('mousemove', onMove);
+        document.removeEventListener('mouseup', onUp);
+        document.body.style.userSelect = '';
+        clampWindowPosition(win);
+        updateWindowScale(win.id);
+      }
+
+      document.body.style.userSelect = 'none';
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup', onUp);
+    });
+  });
 }
 
 /* ============================
@@ -2539,30 +727,20 @@ function openFolder(key) {
       <h2 style="margin-bottom:12px;">under construction</h2>
       <p>check back soon!</p>
     </div>`;
-    createWindow(folder.title, folder.icon, html, { width: 360, height: 240 });
+    createWindow(folder.title, folder.icon, html, { width: 720, height: 240 });
     return;
   }
   if (folder.type === 'about-combined') {
-    const winId = createWindow(folder.title, folder.icon, buildAboutPage(), { width: 680, height: 700 });
+    const winId = createWindow(folder.title, folder.icon, buildAboutPage(), { width: 1360, height: 700 });
     const win = document.getElementById(winId);
-    const mainImg = win.querySelector('.gallery-main-img');
-    const empty = win.querySelector('.about-gallery .cake-empty');
-    const caption = win.querySelector('.about-gallery .gallery-caption');
-    const thumbsEl = win.querySelector('.about-gallery .cake-thumbs');
-    let current = 0;
-    function showAbout(i) {
-      current = i;
-      mainImg.style.display = '';
-      empty.style.display = 'none';
-      mainImg.src = aboutPhotos[i].src;
-      caption.textContent = aboutPhotos[i].caption;
-      thumbsEl.querySelectorAll('.cake-thumb').forEach((t, idx) => t.classList.toggle('active', idx === i));
-    }
-    mainImg.addEventListener('error', () => { mainImg.style.display = 'none'; empty.style.display = 'block'; });
-    win.querySelector('.about-gallery .cake-nav.prev').addEventListener('click', () => showAbout((current - 1 + aboutPhotos.length) % aboutPhotos.length));
-    win.querySelector('.about-gallery .cake-nav.next').addEventListener('click', () => showAbout((current + 1) % aboutPhotos.length));
-    thumbsEl.querySelectorAll('.cake-thumb').forEach((t, i) => t.addEventListener('click', () => showAbout(i)));
-    showAbout(0);
+    buildCenterModeCarousel({
+      photos: aboutPhotos,
+      track: win.querySelector('.about-gallery .cg-track'),
+      empty: win.querySelector('.about-gallery .cake-empty'),
+      caption: win.querySelector('.about-gallery .gallery-caption'),
+      prevBtn: win.querySelector('.about-gallery .cake-nav.prev'),
+      nextBtn: win.querySelector('.about-gallery .cake-nav.next')
+    });
     return;
   }
   createWindow(folder.title, folder.icon, buildFolderView(key));
@@ -2570,15 +748,9 @@ function openFolder(key) {
 
 
 function buildAboutPage() {
-  const thumbs = aboutPhotos.map((p, i) => `
-    <div class="cake-thumb${i === 0 ? ' active' : ''}" data-i="${i}">
-      <img src="${p.src}" alt="${i + 1}" onerror="this.parentElement.style.background='#ddd'">
-    </div>`).join('');
-
   return `<div class="about-page">
     <div class="about-header">
       <div class="about-name">\u2728 Galaxy Pham \u2728</div>
-      <div class="about-tagline">product builder \u00b7 professional chef \u00b7 founder of \u00e1o archive</div>
     </div>
 
     <div class="about-section">
@@ -2592,30 +764,22 @@ function buildAboutPage() {
 
     <div class="about-section">
       <h3>\uD83D\uDCF8 photos</h3>
-      <div class="cake-gallery about-gallery">
+      <div class="cake-gallery cute-gallery about-gallery">
         <div class="cake-main">
+          <span class="cg-blob cg-blob-1"></span>
+          <span class="cg-blob cg-blob-2"></span>
+          <span class="cg-blob cg-blob-3"></span>
+          <div class="cg-glitter"></div>
           <button class="cake-nav prev" type="button" title="Previous">\u2039</button>
-          <img class="gallery-main-img" alt="">
-          <div class="cake-empty" style="display:none;">photos coming soon \u2728</div>
+          <div class="cg-stage">
+            <div class="cg-track"></div>
+            <div class="cake-empty" style="display:none;">photos coming soon \u2728</div>
+          </div>
           <button class="cake-nav next" type="button" title="Next">\u203A</button>
         </div>
-        <div class="cake-caption gallery-caption"></div>
-        <div class="cake-thumbs">${thumbs}</div>
-      </div>
-    </div>
-
-    <hr class="about-divider">
-
-    <div class="about-section">
-      <h3>\u2728 fun facts</h3>
-      <div class="facts-grid">
-        <div class="fact-card"><span class="fact-num">01</span>I am an introverted extrovert. I will be the life of the party and then need three business days to recover.</div>
-        <div class="fact-card"><span class="fact-num">02</span>Fish sauce in tomato sauce spaghetti is genuinely one of the best things I have ever made. Very Viet of me, and I stand by it.</div>
-        <div class="fact-card"><span class="fact-num">03</span>I once found a mint condition AllSaints leather bag at a Savers for $16. Retail: $400. This is what \u00e1o archive is built on.</div>
-        <div class="fact-card"><span class="fact-num">04</span>Racks was the first app I ever built entirely by myself. Very proud of that one.</div>
-        <div class="fact-card"><span class="fact-num">05</span>I was eating sardines before the 2025 craze. I\u2019m not NOT saying I\u2019m a trendsetter.</div>
-        <div class="fact-card"><span class="fact-num">06</span>Bucket list: visit sardine canning factories in Portugal. Yes, this is a real goal. Yes, I am serious.</div>
-        <div class="fact-card"><span class="fact-num">07</span>Hot take: corn should be on everything. This is not up for debate.</div>
+        <div class="cg-footer">
+          <div class="cake-caption gallery-caption"></div>
+        </div>
       </div>
     </div>
   </div>`;
@@ -2627,7 +791,7 @@ function openFile(folderKey, fileName) {
   const file = folder.files.find(f => f.name === fileName);
   if (!file) return;
   const title = folder.title + fileName;
-  const opts = file.type === 'winamp' ? { width: 380, height: 360 } : {};
+  const opts = file.type === 'winamp' ? { width: 760, height: 360 } : {};
   createWindow(title, file.icon, buildFileContent(file), opts);
 }
 
@@ -2638,7 +802,7 @@ function openMyWork() {
   if (typeof markTodoDone === 'function') markTodoDone('mywork');
   const html = `<div class="mywork-window">
     <div class="mywork-intro">
-      Hi, I\u2019m <strong>Galaxy</strong>. I build operational products that make messy processes visible and traceable. Here\u2019s what I\u2019ve shipped.
+      Hi, I\u2019m <strong>Galaxy</strong>. I build operational products that make messy processes visible and traceable. Here\u2019s a sample of what I\u2019ve shipped.
     </div>
 
     <div class="mywork-card" onclick="openRoadmap()">
@@ -2657,11 +821,23 @@ function openMyWork() {
       <div class="mywork-cta">\u25B8 Open case study</div>
     </div>
 
+    <div class="mywork-more-row">
+      <button class="mywork-more-btn" onclick="showMoreProjects()">more projects</button>
+    </div>
+
     <div class="mywork-footer">
       P.S. Snoop around the rest of the desktop when you\u2019re done. There\u2019s cake, cats, and a music player too.
     </div>
   </div>`;
-  createWindow('my work.exe', '\uD83D\uDCBC', html, { width: 540, height: 560 });
+  createWindow('my work.exe', '\uD83D\uDCBC', html, { width: 1080, height: 560 });
+}
+
+function showMoreProjects() {
+  showXpDialog(
+    'more projects',
+    "\uD83D\uDEA7 <strong>under construction</strong> \uD83D\uDEA7<br><br>I\u2019m working hard to build more examples to share here.<br><br>In the meantime, if you\u2019d like to hear more about my work, you can email me at <strong>phamgalaxy18@gmail.com</strong> \u2728",
+    '\uD83D\uDEA7'
+  );
 }
 
 function openRacks() {
@@ -2680,6 +856,16 @@ function openRacks() {
     </div>
 
     <div class="case-section">
+      <h3>Numbers</h3>
+      <div class="case-metrics">
+        <div class="case-metric"><span class="case-metric-num">5 min \u2192 15 sec</span><span class="case-metric-label">Manual processing time per item, cut by AI classification</span></div>
+        <div class="case-metric"><span class="case-metric-num">70%</span><span class="case-metric-label">Retention among in-person onboarded users, identified via cohort segmentation</span></div>
+        <div class="case-metric"><span class="case-metric-num">100+</span><span class="case-metric-label">User interviews and contextual inquiry sessions feeding the roadmap</span></div>
+        <div class="case-metric"><span class="case-metric-num">7 / 10</span><span class="case-metric-label">Active vs. onboarded users on the scaling version (intentionally selective rollout)</span></div>
+      </div>
+    </div>
+
+    <div class="case-section">
       <h3>My Role</h3>
       <p>Founder. I built the MVP solo using Cursor and Claude Sonnet, deployed it on GitHub Pages, and used Gemini 2.0 for image classification. After validating the product with real users, I brought on a technical co-founder to architect the scaling version on Supabase. The build linked in this portfolio is my personal MVP, kept public so PMs can interact with the work I personally shipped.</p>
     </div>
@@ -2693,16 +879,6 @@ function openRacks() {
         <li><em>Cut the personal-cache approach</em> once it became clear it could not scale to commercial use. We rewrote the persistence layer with a co-founder rather than limping forward with the original architecture.</li>
         <li><em>Founder-led onboarding</em>: I show up at customer warehouses and personally capture thousands of items. It is slow, but it locks in retention and surfaces bottlenecks I cannot see from the UI alone.</li>
       </ul>
-    </div>
-
-    <div class="case-section">
-      <h3>Numbers</h3>
-      <div class="case-metrics">
-        <div class="case-metric"><span class="case-metric-num">5 min \u2192 15 sec</span><span class="case-metric-label">Manual processing time per item, cut by AI classification</span></div>
-        <div class="case-metric"><span class="case-metric-num">70%</span><span class="case-metric-label">Retention among in-person onboarded users, identified via cohort segmentation</span></div>
-        <div class="case-metric"><span class="case-metric-num">100+</span><span class="case-metric-label">User interviews and contextual inquiry sessions feeding the roadmap</span></div>
-        <div class="case-metric"><span class="case-metric-num">7 / 10</span><span class="case-metric-label">Active vs. onboarded users on the scaling version (intentionally selective rollout)</span></div>
-      </div>
     </div>
 
     <div class="case-section">
@@ -2733,7 +909,7 @@ function openRacks() {
       <button class="prod-btn" onclick="window.open('${repo}','_blank')">\u2197 View repo on GitHub</button>
     </div>
   </div>`;
-  createWindow('Racks: Case Study', '&#128087;', html, { width: 620, height: 640 });
+  createWindow('Racks: Case Study', '&#128087;', html, { width: 1240, height: 640 });
 }
 
 function openRoadmap() {
@@ -2750,6 +926,16 @@ function openRoadmap() {
         The intake process had a specific failure pattern. Stakeholders DM\u2019d friends in engineering directly. Requests lived in email threads invisible to anyone not cc\u2019d. When someone took PTO or left the company, their work in flight vanished with them. Requestors had no visibility into the queue, so reasonable deprioritization looked like being ignored, and trust eroded.
       </div>
       <div class="case-quote">Most people read this as a prioritization problem. It is not. It is a visibility problem. Requestors do not bypass PMs because they disagree with the framework. They bypass PMs because they cannot see the pipeline and do not trust it.</div>
+    </div>
+
+    <div class="case-section">
+      <h3>Impact at Meta</h3>
+      <div class="case-metrics">
+        <div class="case-metric"><span class="case-metric-num">95%</span><span class="case-metric-label">On-time delivery in the first year after launching the process</span></div>
+        <div class="case-metric"><span class="case-metric-num">100\u2013150</span><span class="case-metric-label">Requests processed per half across 6 global regions</span></div>
+        <div class="case-metric"><span class="case-metric-num">96%</span><span class="case-metric-label">Self-service resolution rate within 3 months on the adjacent LLM automation alpha-to-GA</span></div>
+        <div class="case-metric"><span class="case-metric-num">3 hr \u2192 30 min</span><span class="case-metric-label">Weekly onboarding time for Global Security Dept. across 40,000 employees (83% reduction)</span></div>
+      </div>
     </div>
 
     <div class="case-section">
@@ -2779,16 +965,6 @@ function openRoadmap() {
     </div>
 
     <div class="case-section">
-      <h3>Impact at Meta</h3>
-      <div class="case-metrics">
-        <div class="case-metric"><span class="case-metric-num">95%</span><span class="case-metric-label">On-time delivery in the first year after launching the process</span></div>
-        <div class="case-metric"><span class="case-metric-num">100\u2013150</span><span class="case-metric-label">Requests processed per half across 6 global regions</span></div>
-        <div class="case-metric"><span class="case-metric-num">96%</span><span class="case-metric-label">Self-service resolution rate within 3 months on the adjacent LLM automation alpha-to-GA</span></div>
-        <div class="case-metric"><span class="case-metric-num">3 hr \u2192 30 min</span><span class="case-metric-label">Weekly onboarding time for Global Security Dept. across 40,000 employees (83% reduction)</span></div>
-      </div>
-    </div>
-
-    <div class="case-section">
       <h3>Why I Rebuilt It as a Template</h3>
       <p>The internal Meta version is not portable, and the underlying problem is everywhere. Most product orgs solve intake with a Notion table and good intentions. I wanted to give other teams a defensible, opinionated starting point: RICE done correctly, audit trail built in, role-aware views, and no weight knobs to argue about. Fork it, swap the seed data, and you have a credible intake process in an afternoon.</p>
     </div>
@@ -2803,7 +979,7 @@ function openRoadmap() {
       <button class="prod-btn" onclick="window.open('${launchKit}','_blank')">\u2197 Read the launch kit</button>
     </div>
   </div>`;
-  createWindow('Roadmapping Tool: Case Study', '&#129517;', html, { width: 620, height: 680 });
+  createWindow('Roadmapping Tool: Case Study', '&#129517;', html, { width: 1240, height: 680 });
 }
 
 /* ============================
@@ -2902,7 +1078,7 @@ function renderArcadeList(rootEl, cabIdx) {
 }
 
 function openHobbies() {
-  const winId = createWindow("Galaxy's Arcade: Games", '\uD83C\uDFAE', '<div class="arcade-root"></div>', { width: 560, height: 640 });
+  const winId = createWindow("Galaxy's Arcade: Games", '\uD83C\uDFAE', '<div class="arcade-root"></div>', { width: 1120, height: 640 });
   const root = document.getElementById(winId).querySelector('.arcade-root');
   renderArcadeMenu(root);
 }
@@ -2970,7 +1146,7 @@ function openMusic() {
     <div class="music-footer">\u266B  30s preview free \u00b7 full song w/ spotify login  \u266B</div>
   </div>`;
 
-  const winId = createWindow('jukebox.exe: galaxy\u2019s top 5', '\uD83C\uDFB5', html, { width: 480, height: 640 });
+  const winId = createWindow('jukebox.exe: galaxy\u2019s top 5', '\uD83C\uDFB5', html, { width: 960, height: 640 });
   const win = document.getElementById(winId);
 
   let current = 0;
@@ -3041,61 +1217,82 @@ function openPuckShrine() {
 
 function openGallery(cfg) {
   const photos = cfg.photos;
-  const html = `<div class="cake-gallery">
+  const html = `<div class="cake-gallery cute-gallery">
     <div class="cake-main">
+      <span class="cg-blob cg-blob-1"></span>
+      <span class="cg-blob cg-blob-2"></span>
+      <span class="cg-blob cg-blob-3"></span>
+      <div class="cg-glitter"></div>
       <button class="cake-nav prev" type="button" title="Previous">\u2039</button>
-      <img class="gallery-main-img" alt="">
-      <div class="cake-empty" style="display:none;">${cfg.emptyMsg || 'photos will live here'}</div>
+      <div class="cg-stage">
+        <div class="cg-track"></div>
+        <div class="cake-empty" style="display:none;">${cfg.emptyMsg || 'photos will live here'}</div>
+      </div>
       <button class="cake-nav next" type="button" title="Next">\u203A</button>
     </div>
-    <div class="cake-caption gallery-caption"></div>
-    <div class="cake-thumbs"></div>
+    <div class="cg-footer">
+      <div class="cake-caption gallery-caption"></div>
+    </div>
   </div>`;
 
-  const winId = createWindow(cfg.title, cfg.icon, html, { width: 620, height: 540 });
+  const winId = createWindow(cfg.title, cfg.icon, html, { width: 1100, height: 640 });
   const win = document.getElementById(winId);
-  const mainImg = win.querySelector('.gallery-main-img');
+  const track = win.querySelector('.cg-track');
   const empty = win.querySelector('.cake-empty');
   const caption = win.querySelector('.gallery-caption');
-  const thumbsEl = win.querySelector('.cake-thumbs');
+
+  buildCenterModeCarousel({ photos, track, empty, caption,
+    prevBtn: win.querySelector('.cake-nav.prev'), nextBtn: win.querySelector('.cake-nav.next') });
+}
+
+/* Center-mode carousel: active slide centered + enlarged, neighbors scaled down and dimmed. */
+function buildCenterModeCarousel(o) {
+  const { photos, track, empty, caption, prevBtn, nextBtn } = o;
   let current = 0;
 
-  function show(i) {
-    current = i;
-    mainImg.style.display = '';
-    empty.style.display = 'none';
-    mainImg.src = photos[i].src;
-    caption.textContent = photos[i].caption;
-    thumbsEl.querySelectorAll('.cake-thumb').forEach((t, idx) => {
-      t.classList.toggle('active', idx === i);
-    });
-  }
-  function nav(dir) {
-    show((current + dir + photos.length) % photos.length);
-  }
-
-  mainImg.addEventListener('error', () => {
-    mainImg.style.display = 'none';
+  if (!photos.length) {
     empty.style.display = 'block';
-  });
-  win.querySelector('.cake-nav.prev').addEventListener('click', () => nav(-1));
-  win.querySelector('.cake-nav.next').addEventListener('click', () => nav(1));
+    return;
+  }
 
-  photos.forEach((p, i) => {
-    const t = document.createElement('div');
-    t.className = 'cake-thumb' + (i === 0 ? ' active' : '');
+  const slides = photos.map((p, i) => {
+    const s = document.createElement('div');
+    s.className = 'cg-slide';
     const img = document.createElement('img');
     img.src = p.src;
-    img.alt = String(i + 1);
+    img.alt = p.caption || String(i + 1);
     img.addEventListener('error', () => {
-      const span = document.createElement('span');
-      span.textContent = '[' + (i + 1) + ']';
-      img.replaceWith(span);
+      s.classList.add('cg-slide-empty');
+      img.remove();
+      if (!s.querySelector('.cg-slide-ph')) {
+        const ph = document.createElement('span');
+        ph.className = 'cg-slide-ph';
+        ph.textContent = '\uD83D\uDCF7';
+        s.appendChild(ph);
+      }
     });
-    t.appendChild(img);
-    t.addEventListener('click', () => show(i));
-    thumbsEl.appendChild(t);
+    s.appendChild(img);
+    s.addEventListener('click', () => { if (i !== current) show(i); });
+    track.appendChild(s);
+    return s;
   });
+
+  const n = photos.length;
+  function show(i) {
+    current = i;
+    caption.textContent = photos[i].caption;
+    slides.forEach((s, idx) => {
+      let off = idx - i;
+      if (off > n / 2) off -= n;
+      if (off < -n / 2) off += n;
+      s.className = 'cg-slide ' + (Math.abs(off) > 1 ? 'cg-hide' : 'cg-pos' + off)
+        + (s.classList.contains('cg-slide-empty') ? ' cg-slide-empty' : '');
+    });
+  }
+  function nav(dir) { show((current + dir + n) % n); }
+
+  prevBtn.addEventListener('click', () => nav(-1));
+  nextBtn.addEventListener('click', () => nav(1));
 
   show(0);
 }
@@ -3117,7 +1314,7 @@ function openBrowser(name, url, icon) {
       <button class="open-btn" onclick="window.open('${url}','_blank')">take me to ${name} \u2192</button>
     </div>
   </div>`;
-  createWindow(name + ' - Internet Explorer', icon, html, { width: 540, height: 360 });
+  createWindow(name + ' - Internet Explorer', icon, html, { width: 1080, height: 360 });
 }
 
 /* ============================
@@ -3189,7 +1386,7 @@ function openProperties() {
       <p><span class="prop-label">site version:</span> v1.0</p>
       <p><span class="prop-label">resolution:</span> ${window.innerWidth} x ${window.innerHeight}</p>
       <p><span class="prop-label">vibe:</span> immaculate</p>
-    </div>`, { width: 320, height: 240 });
+    </div>`, { width: 640, height: 240 });
 }
 
 function openAboutSite() {
@@ -3200,7 +1397,7 @@ function openAboutSite() {
       <p>This is Galaxy's portfolio, built to look and feel like a Windows XP desktop.</p>
       <p>everything here is a window. folders open into explorers, files open into content viewers, and you can drag everything around.</p>
       <p>built with vanilla HTML, CSS, and JS. no frameworks, no libraries, just vibes.</p>
-    </div>`, { width: 440, height: 280 });
+    </div>`, { width: 880, height: 280 });
 }
 
 function triggerShutdown() {
@@ -3468,11 +1665,11 @@ const iconMessages = {
                  properties: "100% Galaxy. no preservatives, no filler." },
   cats:        { delete: "absolutely not. Puck deletes YOU.",
                  properties: "name: Puck. occupation: menace. status: beloved." },
-  games:       { delete: "you cannot delete the games. the games delete YOU.",
+  games:       { delete: "are you sure? you'll lose all your unsaved progress!! (yes this is a guilt trip)",
                  properties: "currently grinding: Stardew. always Stardew." },
   music:       { delete: "do NOT take away the playlist.",
                  properties: "currently spinning: probably something delusional." },
-  bakery:      { delete: "the cakes are non-negotiable.",
+  bakery:      { delete: "don't waste food!! these cakes took HOURS. into the bin you do not go.",
                  properties: "preheat oven to 350. always 350." },
   racks:       { delete: "built this from scratch. show some respect.",
                  properties: "Racks v0, the MVP that started it all." },
@@ -3490,9 +1687,8 @@ const iconMessages = {
 function showXpDialog(title, message, icon) {
   const overlay = document.createElement('div');
   overlay.className = 'xp-dialog-overlay';
-  overlay.style.cssText = 'position:fixed;inset:0;z-index:95000;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.2);';
   const ic = icon || '\u26a0\ufe0f';
-  overlay.innerHTML = `<div class="fake-popup" style="position:relative;width:320px;">
+  overlay.innerHTML = `<div class="fake-popup">
     <div class="fp-titlebar"><span class="fp-icon">${ic}</span><span class="fp-title">${title}</span><span class="fp-close">\u2715</span></div>
     <div class="fp-body"><span class="fp-warn">${ic}</span><span class="fp-msg">${message}</span></div>
     <div class="fp-btnbar"><button class="fp-ok">OK</button></div>
@@ -3681,6 +1877,8 @@ window.addEventListener('resize', () => {
     icon.style.left = x + 'px';
     icon.style.top  = y + 'px';
   });
+  clampAllWindows();
+  Object.keys(openWindows).forEach(updateWindowScale);
 });
 
 /* ============================
